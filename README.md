@@ -1,7 +1,7 @@
 # java-katas
 programming katas in java to exercise TDD, OO, pair programming and other software development practices
 
-## pair programming
+## Pair Programming
 development is done in pairs, with devs taking the roles of a driver and a co-pilot. following the analogy, the driver is in control
 of the keyboard and does most of the coding; whereas the co-pilot takes a strategical role by helping the driver decide what
 should be the next path to explore. roles ought be interchanged every so often but it's not mandatory. effective pair programming should
@@ -72,3 +72,25 @@ Donts of unit testing:
 
 Because unit tests idealise the interactions of the subject class with the other classes, other types of testing are still
 necessary (integration testing being one of them).
+
+## Static Methods
+
+When a method doesn't need use any state from an object's instance it can be made static. static methods belong to the jvm
+rather than an object instance. as a consequence of this static methods are usually very simple, short and used primarily as
+helpers. example usages of static methods are :
+
+- numerical computations (look at all the Math's package methods...Math.abs(), Math.pow(),
+Math.random(), Math.max(). None of these methods need of an object's instance state to work.
+- factory methods (methods used to create object instances) for classes with awkward constructors, look at LocalDate.now(), LocalDate.from(), LocalDate.of(), Collections.singletonList()
+
+## Public, private, provided, default visibility modifiers
+
+ -public is used for those methods that are intended to be freely called by all other classes
+ -private methods can't be called by any other class other than the class declaring said method, it is used to
+ hide the complexity of code into submethods
+ -default methods don't have a visibility modifier keyword, they're used to allow classes in the same package to make use
+ of them but prevent classes outside of its package from accessing them. an example usage is the getPlayer1Points() method in SimplifiedTennisMatch,
+ we wanted the SimplifiedTennisMatchFormatter to have access to the player names, but we don't want developers using our library to have access to it
+ -protected methods can be seen by classes in the same package and subclasses, i.e. like protected but subclasses can also see said method.
+ used similarly as default methods but used to also allow subclasses to override the behaviour of the proctected methods. abstract classes normally have
+ protected methods.

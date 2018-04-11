@@ -66,7 +66,7 @@ public class SimplifiedTennisMatch {
         return finishedGame;
     }
 
-    public Optional<String> getWinner() {
+    Optional<String> getWinner() {
         return Optional.ofNullable(winner);
     }
 }
