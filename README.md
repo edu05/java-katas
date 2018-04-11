@@ -42,8 +42,8 @@ These are the common benefits of TDD:
 
 - thinking about the tests before writing the code allows for simpler designs, leading to less over-engineering;
 remember: write the minimum amount of code that will make the tests pass
-- writing the tests first usually
-- tests give you
+- writing the tests first usually leads to the correct object encapsulation (the whole principle of OO)
+- tests give you confidence that your code still works after you've made changes it after a refactoring exercise or adding new functionality
 
 
 ## Unit Testing
@@ -60,6 +60,8 @@ Dos of unit testing:
 
 - test small amounts of behaviour in each test case
 - test business logic
+- see the test case fail before writing the code that'll make it pass
+- keep tests up to date
 
 Donts of unit testing:
 
