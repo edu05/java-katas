@@ -17,3 +17,7 @@ The goal of this kata is print the score of a simplified tennis game while pract
 7. When both players have 3 or more points, and the same number of points reflect this with a DEUCE
 
 8. A match has finished when either player has won, do not allow any more points to be scored
+
+9. A match needs to be won by a difference of 3 points
+
+10. A match needs to be won by a minimum of 7 points
