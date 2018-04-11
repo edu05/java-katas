@@ -13,7 +13,9 @@ public class BowlingGame {
     public int getScore() {
         int score = 0;
         for (int i = 0; i < 20; i++) {
-            if (rolls[i] + rolls[i+1] == 10) {
+            if (rolls[i] == 10) {
+                score += 10 + rolls[i + 1] + rolls[i + 2];
+            } else if (rolls[i] + rolls[i + 1] == 10) {
                 score += 10 + rolls[i + 2];
                 i++;
             } else {
