@@ -23,6 +23,12 @@ public class SimplifiedTennisMatch {
     }
 
     public String formatScore() {
+        if (player1Points >=4) {
+            return player1 + " wins!";
+        } else if (player2Points >= 4) {
+            return player2 + " wins!";
+        }
+
         String score = new StringBuilder()
                 .append(player1 + " - " + player2 + "\n")
                 .append(player1Points + " - " + player2Points)
