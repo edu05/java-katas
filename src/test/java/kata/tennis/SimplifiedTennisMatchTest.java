@@ -63,7 +63,7 @@ public class SimplifiedTennisMatchTest {
 
         String expectedScoreString = new StringBuilder()
                 .append("Nadal - Federer\n")
-                .append("4 - 3")
+                .append("ADVANTAGE - ")
                 .toString();
         assertThat(match.formatScore(), is(expectedScoreString));
     }

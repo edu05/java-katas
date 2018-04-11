@@ -11,3 +11,5 @@ The goal of this kata is print the score of a simplified tennis game while pract
 4. A player needs to win a game by more than a points difference
 
 5. 1 point should be viewed as 15, 2 as 30 and 3 as 40...
+
+6. When both players have 3 or more points, and a different number of points, reflect this with an ADVANTAGE
