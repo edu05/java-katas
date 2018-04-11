@@ -16,12 +16,26 @@ public class SimplifiedTennisMatch {
     }
 
     public void score(String playerName) {
+        if (finishedGame) {
+            throw new RuntimeException("Game has already finished");
+        }
+
         if (playerName.equals(player1)) {
             player1Points++;
         } else if (playerName.equals(player2)) {
             player2Points++;
         }
 
+        finishedGame = hasPlayerWon(playerName);
+    }
+
+    private boolean hasPlayerWon(String playerName) {
+        if (playerName.equals(player1)) {
+            return player1Points >= 4 && player1Points - player2Points > 1;
+        } else if (playerName.equals(player2)) {
+            return player2Points >=4 && player2Points - player1Points > 1;
+        }
+        return false;
     }
 
     int getPlayer1Points() {
