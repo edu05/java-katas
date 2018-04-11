@@ -20,4 +20,20 @@ public class SimplifiedTennisMatchTest {
                 .toString();
         assertThat(match.formatScore(), is(expectedScoreString));
     }
+
+    @Test
+    public void testPlayersScoring() throws Exception {
+        SimplifiedTennisMatch match = new SimplifiedTennisMatch(NADAL, FEDERER);
+
+        match.score(NADAL);
+        match.score(NADAL);
+        match.score(FEDERER);
+
+        String expectedScoreString = new StringBuilder()
+                .append("Nadal - Federer\n")
+                .append("2 - 1")
+                .toString();
+        assertThat(match.formatScore(), is(expectedScoreString));
+
+    }
 }
