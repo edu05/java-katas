@@ -63,7 +63,7 @@ public class SimplifiedTennisMatchTest {
         federerScore(match, 6);
         nadalScore(match, 2);
 
-        assertThat(match.getPlayer1Points(), is(9));
+        assertThat(match.getPlayer1Points(), is(8));
         assertThat(match.getPlayer2Points(), is(6));
         assertThat(match.isFinishedGame(), is(false));
         assertThat(match.getWinner().isPresent(), is(false));

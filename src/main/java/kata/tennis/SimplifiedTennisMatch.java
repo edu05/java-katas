@@ -4,6 +4,8 @@ import java.util.Optional;
 
 public class SimplifiedTennisMatch {
 
+    private static final int MINIMUM_WIN_POINTS = 7;
+    private static final int MINIMUM_WIN_DIFFERENCE = 2;
     private final String player1;
     private final String player2;
 
@@ -29,16 +31,19 @@ public class SimplifiedTennisMatch {
             player2Points++;
         }
 
-        finishedGame = hasPlayerWon(playerName);
+        hasPlayerWon(playerName);
     }
 
     private boolean hasPlayerWon(String playerName) {
-        if (playerName.equals(player1)) {
-            return player1Points >= 4 && player1Points - player2Points > 1;
-        } else if (playerName.equals(player2)) {
-            return player2Points >=4 && player2Points - player1Points > 1;
+        boolean aPlayerHasWon = (player1Points >= MINIMUM_WIN_POINTS && player1Points - player2Points > MINIMUM_WIN_DIFFERENCE)
+                || (player2Points >= MINIMUM_WIN_POINTS && player2Points - player1Points > MINIMUM_WIN_DIFFERENCE);
+
+        if (aPlayerHasWon) {
+            winner = playerName;
+            finishedGame = aPlayerHasWon;
         }
-        return false;
+
+        return aPlayerHasWon;
     }
 
     int getPlayer1Points() {
