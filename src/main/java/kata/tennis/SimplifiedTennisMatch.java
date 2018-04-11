@@ -1,5 +1,7 @@
 package kata.tennis;
 
+import java.util.Optional;
+
 public class SimplifiedTennisMatch {
 
     private final String player1;
@@ -9,6 +11,7 @@ public class SimplifiedTennisMatch {
     private int player2Points = 0;
 
     private boolean finishedGame = false;
+    private String winner = null;
 
     public SimplifiedTennisMatch(String player1, String player2) {
         this.player1 = player1;
@@ -56,5 +59,9 @@ public class SimplifiedTennisMatch {
 
     boolean isFinishedGame() {
         return finishedGame;
+    }
+
+    public Optional<String> getWinner() {
+        return Optional.ofNullable(winner);
     }
 }
