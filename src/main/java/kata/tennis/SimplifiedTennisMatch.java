@@ -62,7 +62,7 @@ public class SimplifiedTennisMatch {
         return player2;
     }
 
-    boolean isFinishedGame() {
+    public boolean isFinishedGame() {
         return finishedGame;
     }
 

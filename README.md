@@ -30,8 +30,8 @@ to achieve effective pair programming as a co-pilot remember to:
 
 ## TDD
 
-Test Driven Development is a set of practices/processes/state-of-mind where emphasises the use of unit tests to drive
-development. If one had to summarise TDD in one sentence that'd be:
+Test Driven Development is a set of practices/processes/state-of-mind that emphasises the use of unit tests to guide
+software design. If one had to summarise TDD in one sentence that'd be:
 
 - write the test, see it fail, make it pass, refactor
 
@@ -43,7 +43,7 @@ These are the common benefits of TDD:
 - thinking about the tests before writing the code allows for simpler designs, leading to less over-engineering;
 remember: write the minimum amount of code that will make the tests pass
 - writing the tests first usually leads to the correct object encapsulation (the whole principle of OO)
-- tests give you confidence that your code still works after you've made changes it after a refactoring exercise or adding new functionality
+- tests give you confidence that your code still works after you've made changes to it after a refactoring exercise or adding new functionality
 
 
 ## Unit Testing
@@ -85,12 +85,12 @@ Math.random(), Math.max(). None of these methods need of an object's instance st
 
 ## Public, private, provided, default visibility modifiers
 
- -public is used for those methods that are intended to be freely called by all other classes
- -private methods can't be called by any other class other than the class declaring said method, it is used to
+ - public is used for those methods that are intended to be freely called by all other classes
+ - private methods can't be called by any other class other than the class declaring said method, it is used to
  hide the complexity of code into submethods
- -default methods don't have a visibility modifier keyword, they're used to allow classes in the same package to make use
+ - default methods don't have a visibility modifier keyword, they're used to allow classes in the same package to make use
  of them but prevent classes outside of its package from accessing them. an example usage is the getPlayer1Points() method in SimplifiedTennisMatch,
  we wanted the SimplifiedTennisMatchFormatter to have access to the player names, but we don't want developers using our library to have access to it
- -protected methods can be seen by classes in the same package and subclasses, i.e. like protected but subclasses can also see said method.
+ - protected methods can be seen by classes in the same package and subclasses, i.e. like protected but subclasses can also see said method.
  used similarly as default methods but used to also allow subclasses to override the behaviour of the proctected methods. abstract classes normally have
  protected methods.
