@@ -14,11 +14,10 @@ public class SimplifiedTennisMatchTest {
     public void testUnstartedMatch() throws Exception {
         SimplifiedTennisMatch match = new SimplifiedTennisMatch(NADAL, FEDERER);
 
-        String expectedScoreString = new StringBuilder()
-                .append("Nadal - Federer\n")
-                .append("0 - 0")
-                .toString();
-        assertThat(SimplifiedTennisMatchFormatter.formatScore(match), is(expectedScoreString));
+        assertThat(match.getPlayer1(), is(NADAL));
+        assertThat(match.getPlayer2(), is(FEDERER));
+        assertThat(match.getPlayer1Points(), is(0));
+        assertThat(match.getPlayer2Points(), is(0));
     }
 
     @Test
@@ -29,62 +28,7 @@ public class SimplifiedTennisMatchTest {
         match.score(NADAL);
         match.score(FEDERER);
 
-        String expectedScoreString = new StringBuilder()
-                .append("Nadal - Federer\n")
-                .append("30 - 15")
-                .toString();
-        assertThat(SimplifiedTennisMatchFormatter.formatScore(match), is(expectedScoreString));
-    }
-
-    @Test
-    public void testPlayerWins() throws Exception {
-        SimplifiedTennisMatch match = new SimplifiedTennisMatch(NADAL, FEDERER);
-
-        match.score(NADAL);
-        match.score(NADAL);
-        match.score(NADAL);
-        match.score(NADAL);
-
-        String expectedScoreString = "Nadal wins!";
-        assertThat(SimplifiedTennisMatchFormatter.formatScore(match), is(expectedScoreString));
-    }
-
-    @Test
-    public void testNeedToWinByAMarginOf2Points() throws Exception {
-        SimplifiedTennisMatch match = new SimplifiedTennisMatch(NADAL, FEDERER);
-
-        match.score(NADAL);
-        match.score(NADAL);
-        match.score(NADAL);
-        match.score(FEDERER);
-        match.score(FEDERER);
-        match.score(FEDERER);
-        match.score(NADAL);
-
-        String expectedScoreString = new StringBuilder()
-                .append("Nadal - Federer\n")
-                .append("ADVANTAGE - ")
-                .toString();
-        assertThat(SimplifiedTennisMatchFormatter.formatScore(match), is(expectedScoreString));
-    }
-
-    @Test
-    public void testDeuce() throws Exception {
-        SimplifiedTennisMatch match = new SimplifiedTennisMatch(NADAL, FEDERER);
-
-        match.score(NADAL);
-        match.score(NADAL);
-        match.score(NADAL);
-        match.score(FEDERER);
-        match.score(FEDERER);
-        match.score(FEDERER);
-        match.score(FEDERER);
-        match.score(NADAL);
-
-        String expectedScoreString = new StringBuilder()
-                .append("Nadal - Federer\n")
-                .append("DEUCE - DEUCE")
-                .toString();
-        assertThat(SimplifiedTennisMatchFormatter.formatScore(match), is(expectedScoreString));
+        assertThat(match.getPlayer1Points(), is(2));
+        assertThat(match.getPlayer2Points(), is(1));
     }
 }
