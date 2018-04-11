@@ -12,9 +12,7 @@ public class BowlingGameTest {
         BowlingGame bowlingGame = new BowlingGame();
 
 
-        for (int i = 0; i < 20; i++) {
-            bowlingGame.score(0);
-        }
+        scoreNTimes(bowlingGame, 0, 20);
 
         assertThat(bowlingGame.getScore(), is(0));
     }
@@ -24,10 +22,25 @@ public class BowlingGameTest {
         BowlingGame bowlingGame = new BowlingGame();
 
 
-        for (int i = 0; i < 20; i++) {
-            bowlingGame.score(1);
-        }
+        scoreNTimes(bowlingGame, 1, 20);
 
         assertThat(bowlingGame.getScore(), is(20));
+    }
+
+    @Test
+    public void testSpareGame() throws Exception {
+        BowlingGame bowlingGame = new BowlingGame();
+
+
+        scoreNTimes(bowlingGame, 5, 2);
+        scoreNTimes(bowlingGame, 1, 18);
+
+        assertThat(bowlingGame.getScore(), is(29));
+    }
+
+    private void scoreNTimes(BowlingGame bowlingGame, int pins, int nTimes) {
+        for (int i = 0; i < nTimes; i++) {
+            bowlingGame.score(pins);
+        }
     }
 }

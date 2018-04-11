@@ -6,3 +6,5 @@ The goal of this kata is to calculate the score of a bowling game while practici
 throw any pins in any of their shots gets a score of 0.
 
 2. Provided a player doesn't throw the full 10 pins of any frame, the player's score is the sum of the pins thrown
+
+3. If a player throws the 10 pins of a frame with the help of both shots, the player's next shot counts twice towards the score
