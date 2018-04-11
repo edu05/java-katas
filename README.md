@@ -27,3 +27,43 @@ to achieve effective pair programming as a co-pilot remember to:
 - not fallback into the trap of disconnecting from the exercise
 - question the driver's decisions when you don't understand them, suggest improvements
 - do some thinking ahead, the driver is both coding and speaking out their thoughts whereas you're just thinking
+
+## TDD
+
+Test Driven Development is a set of practices/processes/state-of-mind where emphasises the use of unit tests to drive
+development. If one had to summarise TDD in one sentence that'd be:
+
+- write the test, see it fail, make it pass, refactor
+
+This cycle describes the normal TDD practice of first thinking what you're going to test / how do you proof your code is working
+/ what problem are you trying to solve; solving it; and then refactoring code into a more elegant solution if appropriate
+
+These are the common benefits of TDD:
+
+- thinking about the tests before writing the code allows for simpler designs, leading to less over-engineering;
+remember: write the minimum amount of code that will make the tests pass
+- writing the tests first usually
+- tests give you
+
+
+## Unit Testing
+
+A unit test is a test for a single unit, the word unit is deliberately ambiguous as different programming languages have different
+definitions for a unit, but in general a unit refers to the smallest unit of code - in Java that'd be a class.
+
+Unit testing allows developers to think about each class (I'll use class and unit interchangeably now) in isolation without having to worry about the correct workings of the other components.
+
+Classes don't often work on their own but rather interact with other classes. To be able to successfully unit test a class the developer
+must be able to idealise the behaviour of the interacting components and test the subject class under said idealised interactions.
+
+Dos of unit testing:
+
+- test small amounts of behaviour in each test case
+- test business logic
+
+Donts of unit testing:
+
+- overdo testing, don't test setters and getters, focus only on business logic
+
+Because unit tests idealise the interactions of the subject class with the other classes, other types of testing are still
+necessary (integration testing being one of them).
