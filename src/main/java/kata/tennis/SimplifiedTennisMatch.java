@@ -31,8 +31,23 @@ public class SimplifiedTennisMatch {
 
         String score = new StringBuilder()
                 .append(player1 + " - " + player2 + "\n")
-                .append(player1Points + " - " + player2Points)
+                .append(formatPoints(player1Points) + " - " + formatPoints(player2Points))
                 .toString();
         return score;
+    }
+
+    private String formatPoints(int points) {
+        switch (points) {
+            case 0:
+                return "0";
+            case 1:
+                return "15";
+            case 2:
+                return "30";
+            case 3:
+                return "40";
+            default:
+                return Integer.toString(points);
+        }
     }
 }
