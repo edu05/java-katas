@@ -15,3 +15,5 @@ The goal of this kata is print the score of a simplified tennis game while pract
 6. When both players have 3 or more points, and a different number of points, reflect this with an ADVANTAGE
 
 7. When both players have 3 or more points, and the same number of points reflect this with a DEUCE
+
+8. A match has finished when either player has won, do not allow any more points to be scored

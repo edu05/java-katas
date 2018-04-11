@@ -8,6 +8,8 @@ public class SimplifiedTennisMatch {
     private int player1Points = 0;
     private int player2Points = 0;
 
+    private boolean finishedGame = false;
+
     public SimplifiedTennisMatch(String player1, String player2) {
         this.player1 = player1;
         this.player2 = player2;
@@ -36,5 +38,9 @@ public class SimplifiedTennisMatch {
 
     String getPlayer2() {
         return player2;
+    }
+
+    boolean isFinishedGame() {
+        return finishedGame;
     }
 }
