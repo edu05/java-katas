@@ -2,11 +2,13 @@ package kata.bowling;
 
 public class BowlingGame {
 
-    public void score(int pins) {
+    private int score = 0;
 
+    public void score(int pins) {
+        score += pins;
     }
 
     public int getScore() {
-        return 0;
+        return score;
     }
 }
