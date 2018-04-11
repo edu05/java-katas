@@ -90,7 +90,7 @@ Math.random(), Math.max(). None of these methods need of an object's instance st
  hide the complexity of code into submethods
  - default methods don't have a visibility modifier keyword, they're used to allow classes in the same package to make use
  of them but prevent classes outside of its package from accessing them. an example usage is the getPlayer1Points() method in SimplifiedTennisMatch,
- we wanted the SimplifiedTennisMatchFormatter to have access to the player names, but we don't want developers using our library to have access to it
+ we wanted the SimpleSimplifiedTennisMatchFormatter to have access to the player names, but we don't want developers using our library to have access to it
  - protected methods can be seen by classes in the same package and subclasses, i.e. like protected but subclasses can also see said method.
  used similarly as default methods but used to also allow subclasses to override the behaviour of the proctected methods. abstract classes normally have
  protected methods.
