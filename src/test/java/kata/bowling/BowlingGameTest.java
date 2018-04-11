@@ -38,6 +38,18 @@ public class BowlingGameTest {
         assertThat(bowlingGame.getScore(), is(29));
     }
 
+    @Test
+    public void testSpareInFinalFrame() throws Exception {
+        BowlingGame bowlingGame = new BowlingGame();
+
+
+        scoreNTimes(bowlingGame, 1, 18);
+        scoreNTimes(bowlingGame, 5, 2);
+        scoreNTimes(bowlingGame, 1, 1);
+
+        assertThat(bowlingGame.getScore(), is(29));
+    }
+
     private void scoreNTimes(BowlingGame bowlingGame, int pins, int nTimes) {
         for (int i = 0; i < nTimes; i++) {
             bowlingGame.score(pins);

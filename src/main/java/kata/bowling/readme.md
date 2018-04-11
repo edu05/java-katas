@@ -7,4 +7,6 @@ throw any pins in any of their shots gets a score of 0.
 
 2. Provided a player doesn't throw the full 10 pins of any frame, the player's score is the sum of the pins thrown
 
-3. If a player throws the 10 pins of a frame with the help of both shots, the player's next shot counts twice towards the score
+3. If a player throws the 10 pins of a frame with the help of both shots (a spare), the player's next shot counts twice towards the score
+
+4. If a player spares on the last frame, the player gets another shot to add as a bonus
