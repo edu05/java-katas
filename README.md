@@ -59,7 +59,9 @@ must be able to idealise the behaviour of the interacting components and test th
 Dos of unit testing:
 
 - test small amounts of behaviour in each test case
-- test business logic
+- only test business logic
+- write the minimum amount of code that'll make the tests pass
+- if it's expected behaviour in your code, write a test for it
 - see the test case fail before writing the code that'll make it pass
 - keep tests up to date
 

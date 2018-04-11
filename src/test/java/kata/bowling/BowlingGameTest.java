@@ -18,4 +18,16 @@ public class BowlingGameTest {
 
         assertThat(bowlingGame.getScore(), is(0));
     }
+
+    @Test
+    public void testSimpleGame() throws Exception {
+        BowlingGame bowlingGame = new BowlingGame();
+
+
+        for (int i = 0; i < 20; i++) {
+            bowlingGame.score(1);
+        }
+
+        assertThat(bowlingGame.getScore(), is(20));
+    }
 }
