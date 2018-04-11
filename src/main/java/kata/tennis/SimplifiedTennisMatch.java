@@ -69,4 +69,8 @@ public class SimplifiedTennisMatch {
     Optional<String> getWinner() {
         return Optional.ofNullable(winner);
     }
+
+    int getMinimumWinPoints() {
+        return MINIMUM_WIN_POINTS;
+    }
 }

@@ -2,6 +2,11 @@ package kata.tennis;
 
 import org.junit.Test;
 
+import static kata.tennis.FakeTennisMatch.deuceMatch;
+import static kata.tennis.FakeTennisMatch.firstPlayerAdvantageMatch;
+import static kata.tennis.FakeTennisMatch.player1WonFinishedMatch;
+import static kata.tennis.FakeTennisMatch.unsfinishedMatch;
+import static kata.tennis.FakeTennisMatch.unstartedMatch;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -11,12 +16,12 @@ public class SimplifiedTennisMatchFormatterTest {
     private static final String FEDERER = "Federer";
 
     @Test
-    public void testZeroZero() throws Exception {
+    public void testUnstartedMatch() throws Exception {
         String expectedScoreString = new StringBuilder()
                 .append("Nadal - Federer\n")
                 .append("0 - 0")
                 .toString();
-        assertThat(SimplifiedTennisMatchFormatter.formatScore(new FakeTennisMatch(NADAL, FEDERER, 0, 0)), is(expectedScoreString));
+        assertThat(SimplifiedTennisMatchFormatter.formatScore(unstartedMatch(NADAL, FEDERER)), is(expectedScoreString));
     }
 
     @Test
@@ -25,23 +30,23 @@ public class SimplifiedTennisMatchFormatterTest {
                 .append("Nadal - Federer\n")
                 .append("30 - 15")
                 .toString();
-        assertThat(SimplifiedTennisMatchFormatter.formatScore(new FakeTennisMatch(NADAL, FEDERER, 2, 1)), is(expectedScoreString));
+        assertThat(SimplifiedTennisMatchFormatter.formatScore(unsfinishedMatch(NADAL, FEDERER, 2, 1)), is(expectedScoreString));
     }
 
     @Test
     public void testPlayerThatHasWon() throws Exception {
 
         String expectedScoreString = "Nadal wins!";
-        assertThat(SimplifiedTennisMatchFormatter.formatScore(new FakeTennisMatch(NADAL, FEDERER, 4, 0)), is(expectedScoreString));
+        assertThat(SimplifiedTennisMatchFormatter.formatScore(player1WonFinishedMatch(NADAL, FEDERER)), is(expectedScoreString));
     }
 
     @Test
-    public void testNeedToWinByAMarginOf2Points() throws Exception {
+    public void testAdvance() throws Exception {
         String expectedScoreString = new StringBuilder()
                 .append("Nadal - Federer\n")
                 .append("ADVANTAGE - ")
                 .toString();
-        assertThat(SimplifiedTennisMatchFormatter.formatScore(new FakeTennisMatch(NADAL, FEDERER, 4, 3)), is(expectedScoreString));
+        assertThat(SimplifiedTennisMatchFormatter.formatScore(firstPlayerAdvantageMatch(NADAL, FEDERER)), is(expectedScoreString));
     }
 
     @Test
@@ -50,6 +55,6 @@ public class SimplifiedTennisMatchFormatterTest {
                 .append("Nadal - Federer\n")
                 .append("DEUCE - DEUCE")
                 .toString();
-        assertThat(SimplifiedTennisMatchFormatter.formatScore(new FakeTennisMatch(NADAL, FEDERER, 4, 4)), is(expectedScoreString));
+        assertThat(SimplifiedTennisMatchFormatter.formatScore(deuceMatch(NADAL, FEDERER)), is(expectedScoreString));
     }
 }
