@@ -31,9 +31,18 @@ public class SimplifiedTennisMatch {
 
         String score = new StringBuilder()
                 .append(player1 + " - " + player2 + "\n")
-                .append(formatPoints(player1Points) + " - " + formatPoints(player2Points))
+                .append(formatMatchScores())
                 .toString();
         return score;
+    }
+
+    private String formatMatchScores() {
+        if (player1Points >=4 && player1Points > player2Points) {
+            return "ADVANTAGE - ";
+        } else if (player2Points >= 4 && player2Points > player1Points) {
+            return " - ADVANTAGE";
+        }
+        return formatPoints(player1Points) + " - " + formatPoints(player2Points);
     }
 
     private String formatPoints(int points) {
