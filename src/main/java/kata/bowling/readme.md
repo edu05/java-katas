@@ -12,3 +12,5 @@ throw any pins in any of their shots gets a score of 0.
 4. If a player spares on the last frame, the player gets another shot to add as a bonus
 
 5. If a player throws the 10 pins of a frame with one shot (a strike), the player's next two shots count twice towards the score
+
+6. If a player strikes on the last frame, the player gets another two shots to add as a bonus
