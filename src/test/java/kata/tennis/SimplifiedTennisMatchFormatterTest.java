@@ -14,6 +14,7 @@ public class SimplifiedTennisMatchFormatterTest {
 
     private static final String NADAL = "Nadal";
     private static final String FEDERER = "Federer";
+    private final SimpleSimplifiedTennisMatchFormatter simpleSimplifiedTennisMatchFormatter = new SimpleSimplifiedTennisMatchFormatter();
 
     @Test
     public void testUnstartedMatch() throws Exception {
@@ -21,7 +22,7 @@ public class SimplifiedTennisMatchFormatterTest {
                 .append("Nadal - Federer\n")
                 .append("0 - 0")
                 .toString();
-        assertThat(SimplifiedTennisMatchFormatter.formatScore(unstartedMatch(NADAL, FEDERER)), is(expectedScoreString));
+        assertThat(simpleSimplifiedTennisMatchFormatter.format(unstartedMatch(NADAL, FEDERER)), is(expectedScoreString));
     }
 
     @Test
@@ -30,14 +31,14 @@ public class SimplifiedTennisMatchFormatterTest {
                 .append("Nadal - Federer\n")
                 .append("30 - 15")
                 .toString();
-        assertThat(SimplifiedTennisMatchFormatter.formatScore(unsfinishedMatch(NADAL, FEDERER, 2, 1)), is(expectedScoreString));
+        assertThat(simpleSimplifiedTennisMatchFormatter.format(unsfinishedMatch(NADAL, FEDERER, 2, 1)), is(expectedScoreString));
     }
 
     @Test
     public void testPlayerThatHasWon() throws Exception {
 
         String expectedScoreString = "Nadal wins!";
-        assertThat(SimplifiedTennisMatchFormatter.formatScore(player1WonFinishedMatch(NADAL, FEDERER)), is(expectedScoreString));
+        assertThat(simpleSimplifiedTennisMatchFormatter.format(player1WonFinishedMatch(NADAL, FEDERER)), is(expectedScoreString));
     }
 
     @Test
@@ -46,7 +47,7 @@ public class SimplifiedTennisMatchFormatterTest {
                 .append("Nadal - Federer\n")
                 .append("ADVANTAGE - ")
                 .toString();
-        assertThat(SimplifiedTennisMatchFormatter.formatScore(firstPlayerAdvantageMatch(NADAL, FEDERER)), is(expectedScoreString));
+        assertThat(simpleSimplifiedTennisMatchFormatter.format(firstPlayerAdvantageMatch(NADAL, FEDERER)), is(expectedScoreString));
     }
 
     @Test
@@ -55,6 +56,6 @@ public class SimplifiedTennisMatchFormatterTest {
                 .append("Nadal - Federer\n")
                 .append("DEUCE - DEUCE")
                 .toString();
-        assertThat(SimplifiedTennisMatchFormatter.formatScore(deuceMatch(NADAL, FEDERER)), is(expectedScoreString));
+        assertThat(simpleSimplifiedTennisMatchFormatter.format(deuceMatch(NADAL, FEDERER)), is(expectedScoreString));
     }
 }

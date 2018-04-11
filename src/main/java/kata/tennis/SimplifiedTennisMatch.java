@@ -73,4 +73,8 @@ public class SimplifiedTennisMatch {
     int getMinimumWinPoints() {
         return MINIMUM_WIN_POINTS;
     }
+
+    public String format(SimplifiedTennisMatchFormatter formatter) {
+        return formatter.format(this);
+    }
 }
