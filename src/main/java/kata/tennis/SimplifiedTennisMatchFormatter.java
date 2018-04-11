@@ -3,28 +3,26 @@ package kata.tennis;
 public class SimplifiedTennisMatchFormatter {
 
     public static String formatScore(SimplifiedTennisMatch simplifiedTennisMatch) {
+        if (simplifiedTennisMatch.isFinishedGame()) {
+            return simplifiedTennisMatch.getWinner().get() + " wins!";
+        }
+
         int player1Points = simplifiedTennisMatch.getPlayer1Points();
         String player1 = simplifiedTennisMatch.getPlayer1();
         int player2Points = simplifiedTennisMatch.getPlayer2Points();
         String player2 = simplifiedTennisMatch.getPlayer2();
 
-        if (player1Points >= 4 && player1Points - player2Points > 1) {
-            return player1 + " wins!";
-        } else if (player2Points >= 4 && player2Points - player1Points > 1) {
-            return player2 + " wins!";
-        }
-
         String score = new StringBuilder()
                 .append(player1 + " - " + player2 + "\n")
-                .append(formatMatchScores(player1Points, player2Points))
+                .append(formatMatchScores(player1Points, player2Points, simplifiedTennisMatch.getMinimumWinPoints()))
                 .toString();
         return score;
     }
 
-    private static String formatMatchScores(int player1Points, int player2Points) {
-        if (player1Points >=4) {
+    private static String formatMatchScores(int player1Points, int player2Points, int minimumWinPoints) {
+        if (player1Points >= minimumWinPoints) {
             return player1Points > player2Points ? "ADVANTAGE - " : "DEUCE - DEUCE";
-        } else if (player2Points >= 4) {
+        } else if (player2Points >= minimumWinPoints) {
             return player2Points > player1Points ? " - ADVANTAGE" : "DEUCE - DEUCE";
         }
 
