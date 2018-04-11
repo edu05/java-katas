@@ -34,6 +34,18 @@ public class SimplifiedTennisMatchTest {
                 .append("2 - 1")
                 .toString();
         assertThat(match.formatScore(), is(expectedScoreString));
+    }
 
+    @Test
+    public void testPlayerWins() throws Exception {
+        SimplifiedTennisMatch match = new SimplifiedTennisMatch(NADAL, FEDERER);
+
+        match.score(NADAL);
+        match.score(NADAL);
+        match.score(NADAL);
+        match.score(NADAL);
+
+        String expectedScoreString = "Nadal wins!";
+        assertThat(match.formatScore(), is(expectedScoreString));
     }
 }
