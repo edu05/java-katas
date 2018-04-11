@@ -37,11 +37,12 @@ public class SimplifiedTennisMatch {
     }
 
     private String formatMatchScores() {
-        if (player1Points >=4 && player1Points > player2Points) {
-            return "ADVANTAGE - ";
-        } else if (player2Points >= 4 && player2Points > player1Points) {
-            return " - ADVANTAGE";
+        if (player1Points >=4) {
+            return player1Points > player2Points ? "ADVANTAGE - " : "DEUCE - DEUCE";
+        } else if (player2Points >= 4) {
+            return player2Points > player1Points ? " - ADVANTAGE" : "DEUCE - DEUCE";
         }
+
         return formatPoints(player1Points) + " - " + formatPoints(player2Points);
     }
 
