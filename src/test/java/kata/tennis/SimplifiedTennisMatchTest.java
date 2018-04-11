@@ -31,7 +31,7 @@ public class SimplifiedTennisMatchTest {
 
         String expectedScoreString = new StringBuilder()
                 .append("Nadal - Federer\n")
-                .append("2 - 1")
+                .append("30 - 15")
                 .toString();
         assertThat(match.formatScore(), is(expectedScoreString));
     }
