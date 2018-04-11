@@ -64,6 +64,7 @@ Dos of unit testing:
 - if it's expected behaviour in your code, write a test for it
 - see the test case fail before writing the code that'll make it pass
 - keep tests up to date
+- give your test cases meaningful names
 
 Donts of unit testing:
 
