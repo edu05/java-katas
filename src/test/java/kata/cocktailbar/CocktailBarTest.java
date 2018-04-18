@@ -11,15 +11,17 @@ import static org.junit.Assert.assertThat;
 
 public class CocktailBarTest {
 
+    private Clock clock = new Clock();
+
     @Test
     public void testEmptyOrderCostsNothing() throws Exception {
-        CocktailBar cocktailBar = new CocktailBar();
+        CocktailBar cocktailBar = new CocktailBar(clock);
         assertThat(cocktailBar.serve(new ArrayList<>()), is(0));
     }
 
     @Test
     public void testAddingPrices() throws Exception {
-        CocktailBar cocktailBar = new CocktailBar();
+        CocktailBar cocktailBar = new CocktailBar(clock);
         List<Cocktail> cocktails = asList(Cocktail.mojito(), Cocktail.bloodyMary());
 
         assertThat(cocktailBar.serve(cocktails), is(22));
@@ -27,7 +29,7 @@ public class CocktailBarTest {
 
     @Test
     public void testPriceForSingleOldFashioned() throws Exception {
-        CocktailBar cocktailBar = new CocktailBar();
+        CocktailBar cocktailBar = new CocktailBar(clock);
         List<Cocktail> cocktails = asList(Cocktail.oldFashioned());
 
         assertThat(cocktailBar.serve(cocktails), is(11));
@@ -35,7 +37,7 @@ public class CocktailBarTest {
 
     @Test
     public void testPriceForTwoOldFashioned() throws Exception {
-        CocktailBar cocktailBar = new CocktailBar();
+        CocktailBar cocktailBar = new CocktailBar(clock);
         List<Cocktail> cocktails = asList(Cocktail.oldFashioned(), Cocktail.oldFashioned());
 
         assertThat(cocktailBar.serve(cocktails), is(11));
