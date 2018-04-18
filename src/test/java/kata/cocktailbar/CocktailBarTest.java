@@ -24,4 +24,20 @@ public class CocktailBarTest {
 
         assertThat(cocktailBar.serve(cocktails), is(22));
     }
+
+    @Test
+    public void testPriceForSingleOldFashioned() throws Exception {
+        CocktailBar cocktailBar = new CocktailBar();
+        List<Cocktail> cocktails = asList(Cocktail.oldFashioned());
+
+        assertThat(cocktailBar.serve(cocktails), is(11));
+    }
+
+    @Test
+    public void testPriceForTwoOldFashioned() throws Exception {
+        CocktailBar cocktailBar = new CocktailBar();
+        List<Cocktail> cocktails = asList(Cocktail.oldFashioned(), Cocktail.oldFashioned());
+
+        assertThat(cocktailBar.serve(cocktails), is(11));
+    }
 }

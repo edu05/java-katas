@@ -16,3 +16,5 @@ has a price and a description. The cost of an order is the sum of the prices of 
    +---------------+-------------------------------------------+-------+
 
    This is an acceptable use case for using static methods as factory methods.
+
+3. You can buy 2 "old fashioned" cocktails for the price of 1
