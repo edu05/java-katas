@@ -44,6 +44,6 @@ public class AmazonTest {
         amazon.buy(customer, item);
 
         assertThat(recordingWallet.getRecordedPayingCustomer(), is(customer));
-        assertThat(recordingWallet.getRecordedPaidAmount(), is(10));
+        assertThat(recordingWallet.getRecordedPaidAmount(), is(10.0));
     }
 }
