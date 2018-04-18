@@ -25,8 +25,12 @@ public class CocktailBar {
                 }
             }
 
-
-            totalPrice += orderedCocktail.getPrice();
+            LocalTime now = clock.getTime();
+            if (now.isAfter(HAPPY_HOUR_START) && now.isBefore(HAPPY_HOUR_END)) {
+                totalPrice += orderedCocktail.getPrice() / 2;
+            } else {
+                totalPrice += orderedCocktail.getPrice();
+            }
         }
 
         return totalPrice;
