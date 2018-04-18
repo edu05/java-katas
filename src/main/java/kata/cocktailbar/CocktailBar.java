@@ -5,6 +5,10 @@ import java.util.List;
 public class CocktailBar {
 
     public int serve(List<Cocktail> orderedCocktails) {
-        return -1;
+        int totalPrice = 0;
+        for (Cocktail orderedCocktail : orderedCocktails) {
+            totalPrice += orderedCocktail.getPrice();
+        }
+        return totalPrice;
     }
 }
