@@ -45,7 +45,11 @@ public class CocktailBarTest {
 
     @Test
     public void testHappyHour() throws Exception {
-        //???
+        CocktailBar cocktailBar = new CocktailBar(new AlwaysHappyHourClock());
+
+        List<Cocktail> cocktails = asList(Cocktail.mojito());
+
+        assertThat(cocktailBar.serve(cocktails), is(5));
 
     }
 }
