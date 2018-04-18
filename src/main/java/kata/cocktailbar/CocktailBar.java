@@ -27,6 +27,7 @@ public class CocktailBar {
                 totalPrice += orderedCocktail.getPrice();
             }
         }
+
         return totalPrice;
     }
 }
