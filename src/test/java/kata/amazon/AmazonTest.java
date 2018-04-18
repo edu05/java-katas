@@ -70,4 +70,17 @@ public class AmazonTest {
 
         assertThat(recordingNotifier.getRecordedNotifiedMessage(), is("You have bought a toaster!"));
     }
+
+    @Test
+    public void testNotifiedAfterPurchaseImproved() throws Exception {
+        Item item = new Item(10, "toaster");
+        Customer customer = new Customer();
+        Notifier recordingNotifier = mock(Notifier.class);
+        Amazon amazon = new Amazon(new Warehouse(), new Wallet(), recordingNotifier);
+
+        amazon.buy(customer, item);
+
+        verify(recordingNotifier).notify("You have bought a toaster!");
+    }
+
 }
