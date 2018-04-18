@@ -20,8 +20,8 @@ public class CocktailBarTest {
     @Test
     public void testAddingPrices() throws Exception {
         CocktailBar cocktailBar = new CocktailBar();
-        List<Cocktail> cocktails = asList(new Cocktail("my fancy cocktail", 3), new Cocktail("cocktail with a punch", 4));
+        List<Cocktail> cocktails = asList(Cocktail.mojito(), Cocktail.bloodyMary());
 
-        assertThat(cocktailBar.serve(cocktails), is(7));
+        assertThat(cocktailBar.serve(cocktails), is(22));
     }
 }
