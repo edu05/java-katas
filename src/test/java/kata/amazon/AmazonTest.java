@@ -4,6 +4,9 @@ import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
+import static org.mockito.Matchers.isNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -83,4 +86,25 @@ public class AmazonTest {
         verify(recordingNotifier).notify("You have bought a toaster!");
     }
 
+    @Test
+    public void testNotEnoughMoney() throws Exception {
+        Item item = new Item(10, "toaster");
+        Customer customer = new Customer();
+        RecordingNotifier recordingNotifier = new RecordingNotifier();
+        RecordingWarehouse recordingWarehouse = new RecordingWarehouse();
+        NoMoneyWallet noMoneyWallet = new NoMoneyWallet();
+        Amazon amazon = new Amazon(recordingWarehouse, noMoneyWallet, recordingNotifier);
+
+        try {
+            amazon.buy(customer, item);
+            fail();
+        } catch (NotEnoughMoneyException e) {
+        }
+
+        assertNull(recordingWarehouse.getRecordedDispatchedItem());
+        assertNull(recordingWarehouse.getRecordedDispatchedCustomer());
+        assertNull(recordingNotifier.getRecordedNotifiedMessage());
+        assertNull(noMoneyWallet.getRecordedPayingCustomer());
+        assertNull(noMoneyWallet.getRecordedPaidAmount());
+    }
 }

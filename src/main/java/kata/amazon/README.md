@@ -17,3 +17,5 @@ Java's Mockito library and its facilities for faking the behaviour of dependenci
 1. When a `Customer` buys an `Item` it gets dispatched by the `Warehouse`
 2. When a `Customer` buys an `Item` they have to pay for it with the `Wallet`
 3. When a `Customer` buys an `Item` they get notified about their purchase with the `Notifier`
+4. When a `Customer` doesn't have enough money to buy an `Item` they get an error by throwing a `NotEnoughMoneyException` exception and nothing is dispatched
+ and no notification is sent and no money is billed
