@@ -1,5 +1,6 @@
 package kata.cocktailbar;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalTime;
@@ -16,16 +17,19 @@ public class CocktailBarTest {
 
     private Clock clock = mock(Clock.class);
 
+    @Before
+    public void setUp() throws Exception {
+        when(clock.getTime()).thenReturn(LocalTime.of(13,00));
+    }
+
     @Test
     public void testEmptyOrderCostsNothing() throws Exception {
-        when(clock.getTime()).thenReturn(LocalTime.of(13,00));
         CocktailBar cocktailBar = new CocktailBar(clock);
         assertThat(cocktailBar.serve(new ArrayList<>()), is(0));
     }
 
     @Test
     public void testAddingPrices() throws Exception {
-        when(clock.getTime()).thenReturn(LocalTime.of(13,00));
         CocktailBar cocktailBar = new CocktailBar(clock);
         List<Cocktail> cocktails = asList(Cocktail.mojito(), Cocktail.bloodyMary());
 
@@ -34,7 +38,6 @@ public class CocktailBarTest {
 
     @Test
     public void testPriceForSingleOldFashioned() throws Exception {
-        when(clock.getTime()).thenReturn(LocalTime.of(13,00));
         CocktailBar cocktailBar = new CocktailBar(clock);
         List<Cocktail> cocktails = asList(Cocktail.oldFashioned());
 
@@ -43,7 +46,6 @@ public class CocktailBarTest {
 
     @Test
     public void testPriceForTwoOldFashioned() throws Exception {
-        when(clock.getTime()).thenReturn(LocalTime.of(13,00));
         CocktailBar cocktailBar = new CocktailBar(clock);
         List<Cocktail> cocktails = asList(Cocktail.oldFashioned(), Cocktail.oldFashioned());
 
