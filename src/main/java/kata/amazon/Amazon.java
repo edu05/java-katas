@@ -14,8 +14,12 @@ public class Amazon {
     }
 
     public void buy(Customer customer, Item item) {
-        wallet.bill(customer, item.getPrice());
-        warehouse.dispatch(customer, item);
-        notifier.notify("You have bought a " + item.getDescription() + "!");
+        if (wallet.hasEnoughMoney(customer, item.getPrice())) {
+            wallet.bill(customer, item.getPrice());
+            warehouse.dispatch(customer, item);
+            notifier.notify("You have bought a " + item.getDescription() + "!");
+        } else {
+            throw new NotEnoughMoneyException();
+        }
     }
 }
