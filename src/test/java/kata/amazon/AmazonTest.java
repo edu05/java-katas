@@ -46,4 +46,16 @@ public class AmazonTest {
         assertThat(recordingWallet.getRecordedPayingCustomer(), is(customer));
         assertThat(recordingWallet.getRecordedPaidAmount(), is(10.0));
     }
+    
+    @Test
+    public void testPayForBoughtItemImproved() throws Exception {
+        Item item = new Item(10);
+        Customer customer = new Customer();
+        Wallet wallet = mock(Wallet.class);
+        Amazon amazon = new Amazon(new Warehouse(), wallet);
+
+        amazon.buy(customer, item);
+
+        verify(wallet).bill(customer, 10.0);
+    }
 }
