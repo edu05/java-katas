@@ -10,7 +10,9 @@ import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 public class AmazonTest {
@@ -115,5 +117,24 @@ public class AmazonTest {
         assertNull(recordingNotifier.getRecordedNotifiedMessage());
         assertNull(noMoneyWallet.getRecordedPayingCustomer());
         assertNull(noMoneyWallet.getRecordedPaidAmount());
+    }
+
+    @Test
+    public void testNotEnoughMoneyImproved() throws Exception {
+        Item item = new Item(10, "toaster");
+        Customer customer = new Customer();
+        Notifier notifier = mock(Notifier.class);
+        Warehouse warehouse = mock(Warehouse.class);
+        Amazon amazon = new Amazon(warehouse, wallet, notifier);
+
+        when(wallet.hasEnoughMoney(any(Customer.class), anyDouble())).thenReturn(false);
+        try {
+            amazon.buy(customer, item);
+            fail();
+        } catch (NotEnoughMoneyException e) {
+        }
+
+        verify(wallet, never()).bill(any(Customer.class), anyDouble());
+        verifyZeroInteractions(warehouse, notifier);
     }
 }
