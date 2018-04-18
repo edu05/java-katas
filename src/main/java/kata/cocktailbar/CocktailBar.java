@@ -15,6 +15,9 @@ public class CocktailBar {
     }
 
     public int serve(List<Cocktail> orderedCocktails) {
+        if (orderedCocktails.size() >= 5) {
+            throw new ShouldntGetDrunkException();
+        }
         int totalPrice = 0;
         int oldFashionedsBought = 0;
         for (Cocktail orderedCocktail : orderedCocktails) {
