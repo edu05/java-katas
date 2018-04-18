@@ -6,7 +6,7 @@ public class Amazon {
     private final Warehouse warehouse;
     private final Wallet wallet;
 
-    public Amazon(Warehouse warehouse, Wallet wallet) {
+    public Amazon(Warehouse warehouse, Wallet wallet, Notifier notifier) {
         this.warehouse = warehouse;
         this.wallet = wallet;
     }
