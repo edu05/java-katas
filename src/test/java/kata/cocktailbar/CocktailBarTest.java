@@ -20,7 +20,7 @@ public class CocktailBarTest {
 
     @Before
     public void setUp() throws Exception {
-        when(clock.getTime()).thenReturn(LocalTime.of(13,00));
+        when(clock.getTime()).thenReturn(LocalTime.of(13, 00));
     }
 
     @Test
@@ -84,5 +84,13 @@ public class CocktailBarTest {
             fail();
         } catch (ShouldntGetDrunkException exception) {
         }
+    }
+
+    @Test(expected = ShouldntGetDrunkException.class)
+    public void testExceptionIsThrownWhenBuyingTooManyDrinksImproved() throws Exception {
+        CocktailBar cocktailBar = new CocktailBar(clock);
+        List<Cocktail> tooManyCocktails = asList(Cocktail.mojito(), Cocktail.mojito(), Cocktail.mojito(), Cocktail.mojito(), Cocktail.mojito());
+
+        cocktailBar.serve(tooManyCocktails);
     }
 }
