@@ -40,4 +40,10 @@ public class CocktailBarTest {
 
         assertThat(cocktailBar.serve(cocktails), is(11));
     }
+
+    @Test
+    public void testHappyHour() throws Exception {
+        //???
+
+    }
 }

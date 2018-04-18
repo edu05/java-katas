@@ -18,3 +18,5 @@ has a price and a description. The cost of an order is the sum of the prices of 
    This is an acceptable use case for using static methods as factory methods.
 
 3. You can buy 2 "old fashioned" cocktails for the price of 1
+
+4. Between 21:00 and 22:00 it's happy hour, all drinks are half price (2 for 1 old fashioneds still applies i.e. you can buy 2 old fashioned cocktails for 5.5)
