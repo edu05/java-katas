@@ -1,23 +1,33 @@
 package kata.amazon;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
-import static org.mockito.Matchers.isNull;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class AmazonTest {
+
+    private Wallet wallet = mock(Wallet.class);
+
+    @Before
+    public void setUp() throws Exception {
+        when(wallet.hasEnoughMoney(any(Customer.class), anyDouble())).thenReturn(true);
+    }
 
     @Test
     public void testBoughtItemsGetDispatchedToCustomer() throws Exception {
         Item item = new Item(10, "toaster");
         Customer customer = new Customer();
         RecordingWarehouse recordingWarehouse = new RecordingWarehouse();
-        Amazon amazon = new Amazon(recordingWarehouse, new Wallet(), new Notifier());
+        Amazon amazon = new Amazon(recordingWarehouse, new InfiniteMoneyWallet(), new Notifier());
 
         amazon.buy(customer, item);
 
@@ -29,8 +39,8 @@ public class AmazonTest {
     public void testBoughtItemsGetDispatchedToCustomerImproved() throws Exception {
         Item item = new Item(10, "toaster");
         Customer customer = new Customer();
-        Warehouse warehouse = mock(Warehouse.class);
-        Amazon amazon = new Amazon(warehouse, new Wallet(), new Notifier());
+        Warehouse warehouse =   mock(Warehouse.class);
+        Amazon amazon = new Amazon(warehouse, wallet, new Notifier());
 
         amazon.buy(customer, item);
 
@@ -41,7 +51,7 @@ public class AmazonTest {
     public void testPayForBoughtItem() throws Exception {
         Item item = new Item(10, "toaster");
         Customer customer = new Customer();
-        RecordingWallet recordingWallet = new RecordingWallet();
+        InfiniteMoneyWallet recordingWallet = new InfiniteMoneyWallet();
         Amazon amazon = new Amazon(new Warehouse(), recordingWallet, new Notifier());
 
         amazon.buy(customer, item);
@@ -54,7 +64,6 @@ public class AmazonTest {
     public void testPayForBoughtItemImproved() throws Exception {
         Item item = new Item(10, "toaster");
         Customer customer = new Customer();
-        Wallet wallet = mock(Wallet.class);
         Amazon amazon = new Amazon(new Warehouse(), wallet, new Notifier());
 
         amazon.buy(customer, item);
@@ -67,7 +76,7 @@ public class AmazonTest {
         Item item = new Item(10, "toaster");
         Customer customer = new Customer();
         RecordingNotifier recordingNotifier = new RecordingNotifier();
-        Amazon amazon = new Amazon(new Warehouse(), new Wallet(), recordingNotifier);
+        Amazon amazon = new Amazon(new Warehouse(), new InfiniteMoneyWallet(), recordingNotifier);
 
         amazon.buy(customer, item);
 
@@ -79,7 +88,7 @@ public class AmazonTest {
         Item item = new Item(10, "toaster");
         Customer customer = new Customer();
         Notifier recordingNotifier = mock(Notifier.class);
-        Amazon amazon = new Amazon(new Warehouse(), new Wallet(), recordingNotifier);
+        Amazon amazon = new Amazon(new Warehouse(), wallet, recordingNotifier);
 
         amazon.buy(customer, item);
 
