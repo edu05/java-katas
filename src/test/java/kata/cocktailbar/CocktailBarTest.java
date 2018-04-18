@@ -10,6 +10,7 @@ import java.util.List;
 import static java.util.Arrays.asList;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -71,5 +72,17 @@ public class CocktailBarTest {
         List<Cocktail> cocktails = asList(Cocktail.mojito());
 
         assertThat(cocktailBar.serve(cocktails), is(5));
+    }
+
+    @Test
+    public void testExceptionIsThrownWhenBuyingTooManyDrinks() throws Exception {
+        CocktailBar cocktailBar = new CocktailBar(clock);
+        List<Cocktail> tooManyCocktails = asList(Cocktail.mojito(), Cocktail.mojito(), Cocktail.mojito(), Cocktail.mojito(), Cocktail.mojito());
+
+        try {
+            cocktailBar.serve(tooManyCocktails);
+            fail();
+        } catch (ShouldntGetDrunkException exception) {
+        }
     }
 }
