@@ -13,3 +13,5 @@ Each of those components will be written by different teams. These teams will de
 release date of your own Amazon. You'll be the main developer in charge of writing the code that glues up everything - following
 up to date TDD practices. The fact that the code for those components hasn't been written yet won't be a problem thanks to
 Java's Mockito library and its facilities for faking the behaviour of dependencies.
+
+1. When a `Customer` buys an `Item` it gets dispatched by the `Warehouse`
