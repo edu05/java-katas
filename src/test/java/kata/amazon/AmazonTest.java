@@ -11,10 +11,10 @@ public class AmazonTest {
 
     @Test
     public void testBoughtItemsGetDispatchedToCustomer() throws Exception {
-        Item item = new Item();
+        Item item = new Item(10);
         Customer customer = new Customer();
         RecordingWarehouse recordingWarehouse = new RecordingWarehouse();
-        Amazon amazon = new Amazon(recordingWarehouse);
+        Amazon amazon = new Amazon(recordingWarehouse, new Wallet());
 
         amazon.buy(customer, item);
 
@@ -24,14 +24,26 @@ public class AmazonTest {
 
     @Test
     public void testBoughtItemsGetDispatchedToCustomerImproved() throws Exception {
-        Item item = new Item();
+        Item item = new Item(10);
         Customer customer = new Customer();
         Warehouse warehouse = mock(Warehouse.class);
-        Amazon amazon = new Amazon(warehouse);
+        Amazon amazon = new Amazon(warehouse, new Wallet());
 
         amazon.buy(customer, item);
 
         verify(warehouse).dispatch(customer, item);
     }
 
+    @Test
+    public void testPayForBoughtItem() throws Exception {
+        Item item = new Item(10);
+        Customer customer = new Customer();
+        RecordingWallet recordingWallet = new RecordingWallet();
+        Amazon amazon = new Amazon(new Warehouse(), recordingWallet);
+
+        amazon.buy(customer, item);
+
+        assertThat(recordingWallet.getRecordedPayingCustomer(), is(customer));
+        assertThat(recordingWallet.getRecordedPaidAmount(), is(10));
+    }
 }

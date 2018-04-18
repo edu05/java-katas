@@ -5,7 +5,7 @@ public class Amazon {
 
     private final Warehouse warehouse;
 
-    public Amazon(Warehouse warehouse) {
+    public Amazon(Warehouse warehouse, Wallet wallet) {
         this.warehouse = warehouse;
     }
 
