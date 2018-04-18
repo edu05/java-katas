@@ -8,12 +8,11 @@ has a price and a description. The cost of an order is the sum of the prices of 
 2. The bar only offers certain cocktails, and wouldn't like for customers to order any cocktail outside their menu. The bar offers:
 
    | cocktail name | description                               | price |
-   +---------------+-------------------------------------------+-------|
+   |---------------|-------------------------------------------|-------|
    | mojito        | traditional Cuban highball                | 10    |
    | godfather     | scotch single malt and amaretto           | 9     |
    | bloody mary   | vodka meets tomato juice and other spices | 12    |
    | old fashioned | whisky muddled with sugar and bitters     | 11    |
-   +---------------+-------------------------------------------+-------+
 
    This is an acceptable use case for using static methods as factory methods.
 
