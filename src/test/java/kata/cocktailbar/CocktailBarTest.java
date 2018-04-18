@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 
 public class CocktailBarTest {
 
-    private Clock clock = new Clock();
+    private Clock clock = new NeverHappyHourClock();
 
     @Test
     public void testEmptyOrderCostsNothing() throws Exception {
