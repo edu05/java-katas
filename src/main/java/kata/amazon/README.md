@@ -15,4 +15,4 @@ up to date TDD practices. The fact that the code for those components hasn't bee
 Java's Mockito library and its facilities for faking the behaviour of dependencies.
 
 1. When a `Customer` buys an `Item` it gets dispatched by the `Warehouse`
-2. When a `Customer` buys an `Item` they have to pay for it
+2. When a `Customer` buys an `Item` they have to pay for it with the `Wallet`
