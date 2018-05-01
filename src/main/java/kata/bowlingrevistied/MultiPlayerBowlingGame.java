@@ -1,31 +1,35 @@
 package kata.bowlingrevistied;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MultiPlayerBowlingGame {
 
-    private final List<Integer> rolls = new ArrayList<>();
+    private final Map<String, List<Integer>> rolls = new HashMap<>();
 
     public MultiPlayerBowlingGame(List<String> players) {
+        players.forEach(player -> rolls.put(player, new ArrayList<>()));
     }
 
     public void roll(int pins, String player) {
-        rolls.add(pins);
+        rolls.get(player).add(pins);
     }
 
     public int getScore(String player) {
         int score = 0;
         int rollsLeft = 20;
+        List<Integer> playerRolls = this.rolls.get(player);
         for (int i = 0; i < rollsLeft; i++) {
-            if (rolls.get(i) == 10) {
-                score += 10 + rolls.get(i + 1) + rolls.get(i + 2);
+            if (playerRolls.get(i) == 10) {
+                score += 10 + playerRolls.get(i + 1) + playerRolls.get(i + 2);
                 rollsLeft--;
-            } else if (i + 1 < rolls.size() && rolls.get(i) + rolls.get(i + 1) == 10) {
-                score += 10 + rolls.get(i + 2);
+            } else if (i + 1 < playerRolls.size() && playerRolls.get(i) + playerRolls.get(i + 1) == 10) {
+                score += 10 + playerRolls.get(i + 2);
                 i++;
             } else {
-                score += rolls.get(i);
+                score += playerRolls.get(i);
             }
         }
         return score;
