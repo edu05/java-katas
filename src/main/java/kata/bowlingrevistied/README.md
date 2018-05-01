@@ -10,3 +10,5 @@ multiple players to play together.
 2. Players that are not in the game are not allowed to roll pins - throw an InvalidPlayerException in such a case
 
 3. Players that are not in the game are not allowed to get their score - throw an InvalidPlayerException in such a case
+
+Explain to yourself, after a player rolls some pins, why don't we need to put the updated List back into the Map?
