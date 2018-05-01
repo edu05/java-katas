@@ -14,7 +14,11 @@ public class MultiPlayerBowlingGame {
     }
 
     public void roll(int pins, String player) {
-        rolls.get(player).add(pins);
+        List<Integer> playerRolls = rolls.get(player);
+        if (playerRolls == null) {
+            throw new InvalidPlayerException();
+        }
+        playerRolls.add(pins);
     }
 
     public int getScore(String player) {
