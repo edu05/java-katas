@@ -94,4 +94,11 @@ public class MultiPlayerBowlingGameTest {
         assertThat(multiPlayerBowlingGame.getScore(NADAL), is(40));
         assertThat(multiPlayerBowlingGame.getScore(FEDERER), is(20));
     }
+
+    @Test(expected = InvalidPlayerException.class)
+    public void testInvalidPlayerCantRoll() throws Exception {
+        MultiPlayerBowlingGame multiPlayerBowlingGame = new MultiPlayerBowlingGame(Arrays.asList(NADAL, FEDERER));
+
+        multiPlayerBowlingGame.roll(5, "edu");
+    }
 }

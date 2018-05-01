@@ -6,3 +6,5 @@ We already have the code to play a bowling game, but only by ourselves, and that
 multiple players to play together.
 
 1. Allow multiple players to roll pins and to retrieve their score sheets
+
+2. Players that are not in the game are not allowed to roll pins - throw an InvalidPlayerException in such a case
