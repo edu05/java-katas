@@ -25,6 +25,11 @@ public class MultiPlayerBowlingGame {
         int score = 0;
         int rollsLeft = 20;
         List<Integer> playerRolls = this.rolls.get(player);
+
+        if (playerRolls == null) {
+            throw new InvalidPlayerException();
+        }
+
         for (int i = 0; i < rollsLeft; i++) {
             if (playerRolls.get(i) == 10) {
                 score += 10 + playerRolls.get(i + 1) + playerRolls.get(i + 2);
