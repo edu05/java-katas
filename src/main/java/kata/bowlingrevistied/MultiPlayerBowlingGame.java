@@ -1,16 +1,21 @@
 package kata.bowlingrevistied;
 
+import java.util.List;
+
 public class MultiPlayerBowlingGame {
 
     private final int[] rolls = new int[21];
     private int rollCounter = 0;
 
-    public void roll(int pins) {
+    public MultiPlayerBowlingGame(List<String> players) {
+    }
+
+    public void roll(int pins, String player) {
         rolls[rollCounter] = pins;
         rollCounter++;
     }
 
-    public int getScore() {
+    public int getScore(String player) {
         int score = 0;
         int rollsLeft = 20;
         for (int i = 0; i < rollsLeft; i++) {
