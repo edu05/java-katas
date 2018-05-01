@@ -8,3 +8,5 @@ multiple players to play together.
 1. Allow multiple players to roll pins and to retrieve their score sheets
 
 2. Players that are not in the game are not allowed to roll pins - throw an InvalidPlayerException in such a case
+
+3. Players that are not in the game are not allowed to get their score - throw an InvalidPlayerException in such a case

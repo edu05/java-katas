@@ -101,4 +101,11 @@ public class MultiPlayerBowlingGameTest {
 
         multiPlayerBowlingGame.roll(5, "edu");
     }
+
+    @Test(expected = InvalidPlayerException.class)
+    public void testInvalidPlayerDoesntHaveAScore() throws Exception {
+        MultiPlayerBowlingGame multiPlayerBowlingGame = new MultiPlayerBowlingGame(Arrays.asList(NADAL, FEDERER));
+
+        multiPlayerBowlingGame.getScore("edu");
+    }
 }
