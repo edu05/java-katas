@@ -2,7 +2,6 @@ package kata.mp3;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -13,9 +12,10 @@ import static java.util.stream.Collectors.groupingBy;
 public class MP3Player {
 
     private final List<Song> songs = new ArrayList<>();
+    private final InternetProvider internetProvider;
 
     public MP3Player(InternetProvider internetProvider) {
-
+        this.internetProvider = internetProvider;
     }
 
     public void addSong(Song song) {
@@ -46,6 +46,6 @@ public class MP3Player {
     }
 
     public SongInfo getSongInfo(Song song) {
-        return null;
+        return internetProvider.getMoreInfo(song);
     }
 }
