@@ -49,7 +49,7 @@ public class MP3PlayerTest {
         mp3Player.addSong(doIWannaKnow);
         mp3Player.addSong(sheMovesInHerOwnWay);
         mp3Player.addSong(iGotMine);
-        List<Song> matchingSongs = mp3Player.findByTitle("key");
+        List<Song> matchingSongs = mp3Player.findByArtist("key");
 
         assertThat(matchingSongs.size(), is(2));
         assertTrue(matchingSongs.contains(doIWannaKnow));
