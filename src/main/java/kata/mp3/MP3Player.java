@@ -15,11 +15,11 @@ public class MP3Player {
     }
 
     public List<Song> findByTitle(String songTitle) {
-        return findBy(songTitle, song -> song.getTitle());
+        return findBy(songTitle, Song::getTitle);
     }
 
     public List<Song> findByArtist(String artist) {
-        return findBy(artist, song -> song.getArtist());
+        return findBy(artist, Song::getArtist);
     }
 
     private List<Song> findBy(String searchTerm, Function<Song, String> searchByFunction) {
