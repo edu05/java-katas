@@ -1,11 +1,14 @@
 package kata.mp3;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.groupingBy;
 
 public class MP3Player {
 
@@ -25,12 +28,11 @@ public class MP3Player {
     }
 
     public Map<String, Integer> countByArtist() {
-        Map<String, Integer> counts = new HashMap<>();
-        for (Song song : songs) {
-            counts.merge(song.getArtist(), 1, (currentValue, increment) -> currentValue + increment);
-        }
 
-        return counts;
+        return songs.stream()
+                .collect(groupingBy(Song::getArtist)).entrySet().stream() //group songs by artists into a Map<String, List<Song>> map
+                .map(entry -> new AbstractMap.SimpleEntry<>(entry.getKey(), entry.getValue().size())) //get the number of songs per artist for each entry in the previous map
+                .collect(Collectors.toMap(AbstractMap.SimpleEntry::getKey, AbstractMap.SimpleEntry::getValue)); //reassemble into a new map
     }
 
     private List<Song> findBy(String searchTerm, Function<Song, String> searchByFunction) {
