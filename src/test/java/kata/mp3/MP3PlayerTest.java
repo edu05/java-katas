@@ -6,6 +6,7 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertTrue;
 
 public class MP3PlayerTest {
 
@@ -19,5 +20,22 @@ public class MP3PlayerTest {
 
         assertThat(matchingSongs.size(), is(1));
         assertThat(matchingSongs.get(0), is(song));
+    }
+
+    @Test
+    public void shouldFindByPartialTitle() throws Exception {
+        MP3Player mp3Player = new MP3Player();
+
+        Song shouldIStayOrShouldIGo = new Song("Should I Stay or Should I Go", "The Clash");
+        Song sheMovesInHerOwnWay = new Song("She Moves in Her Own Way", "The Kooks");
+        Song dontStop = new Song("Don't Stop", "Fleetwood Mac");
+        mp3Player.addSong(shouldIStayOrShouldIGo);
+        mp3Player.addSong(sheMovesInHerOwnWay);
+        mp3Player.addSong(dontStop);
+        List<Song> matchingSongs = mp3Player.findByTitle("Sh");
+
+        assertThat(matchingSongs.size(), is(2));
+        assertTrue(matchingSongs.contains(shouldIStayOrShouldIGo));
+        assertTrue(matchingSongs.contains(sheMovesInHerOwnWay));
     }
 }
