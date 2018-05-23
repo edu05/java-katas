@@ -23,5 +23,9 @@ public class MP3Player {
         return matchingSongs;
     }
 
+    public List<Song> findByArtist(String artist) {
+        return new ArrayList<>();
+    }
+
 
 }

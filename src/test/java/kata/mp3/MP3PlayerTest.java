@@ -38,4 +38,21 @@ public class MP3PlayerTest {
         assertTrue(matchingSongs.contains(shouldIStayOrShouldIGo));
         assertTrue(matchingSongs.contains(sheMovesInHerOwnWay));
     }
+
+    @Test
+    public void shouldFindByPartialArtist() throws Exception {
+        MP3Player mp3Player = new MP3Player();
+
+        Song doIWannaKnow = new Song("Do I Wanna Know?", "Artic Monkeys");
+        Song sheMovesInHerOwnWay = new Song("She Moves in Her Own Way", "The Kooks");
+        Song iGotMine = new Song("I Got Mine", "The Black Keys");
+        mp3Player.addSong(doIWannaKnow);
+        mp3Player.addSong(sheMovesInHerOwnWay);
+        mp3Player.addSong(iGotMine);
+        List<Song> matchingSongs = mp3Player.findByTitle("key");
+
+        assertThat(matchingSongs.size(), is(2));
+        assertTrue(matchingSongs.contains(doIWannaKnow));
+        assertTrue(matchingSongs.contains(iGotMine));
+    }
 }
