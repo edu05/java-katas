@@ -15,7 +15,7 @@ public class MP3Player {
     public List<Song> findByTitle(String songTitle) {
         List<Song> matchingSongs = new ArrayList<>();
         for (Song song : songs) {
-            if (song.getTitle().equals(songTitle)) {
+            if (song.getTitle().contains(songTitle)) {
                 matchingSongs.add(song);
             }
         }
