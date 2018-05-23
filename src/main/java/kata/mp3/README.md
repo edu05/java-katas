@@ -11,3 +11,5 @@ The goal of this kata is to play a little bit with the List and Map APIs while p
 4. Refactor the code to use the Streams API
 
 5. MP3s normally allow you see some statistics, like how many songs per artist you have
+
+6. Can we do it without the null check?
