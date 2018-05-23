@@ -49,8 +49,7 @@ public class MP3Player {
         try {
             return internetProvider.getMoreInfo(song);
         } catch (NoSignalException e) {
-            e.printStackTrace();
-            return null;
+            return new SongInfo(song.getTitle(), song.getArtist());
         }
     }
 }
