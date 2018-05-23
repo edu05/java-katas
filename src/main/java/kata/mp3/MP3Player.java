@@ -1,7 +1,9 @@
 package kata.mp3;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -20,6 +22,10 @@ public class MP3Player {
 
     public List<Song> findByArtist(String artist) {
         return findBy(artist, Song::getArtist);
+    }
+
+    public Map<String, Integer> countByArtist() {
+        return new HashMap<>();
     }
 
     private List<Song> findBy(String searchTerm, Function<Song, String> searchByFunction) {

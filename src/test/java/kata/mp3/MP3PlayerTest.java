@@ -3,6 +3,7 @@ package kata.mp3;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -54,5 +55,30 @@ public class MP3PlayerTest {
         assertThat(matchingSongs.size(), is(2));
         assertTrue(matchingSongs.contains(doIWannaKnow));
         assertTrue(matchingSongs.contains(iGotMine));
+    }
+
+    @Test
+    public void shouldCountArtistSongs() throws Exception {
+        MP3Player mp3Player = new MP3Player();
+
+        Song doIWannaKnow = new Song("Do I Wanna Know?", "Artic Monkeys");
+        Song why = new Song("why'd you only call me when you're high" , "Artic Monkeys");
+        Song dancefloor = new Song("I Bet You Look Good On The Dancefloor" , "Artic Monkeys");
+        Song sheMovesInHerOwnWay = new Song("She Moves in Her Own Way", "The Kooks");
+        Song junkOfTheHeart = new Song("Junk of The Heart", "The Kooks");
+        Song iGotMine = new Song("I Got Mine", "The Black Keys");
+
+        mp3Player.addSong(doIWannaKnow);
+        mp3Player.addSong(why);
+        mp3Player.addSong(dancefloor);
+        mp3Player.addSong(sheMovesInHerOwnWay);
+        mp3Player.addSong(junkOfTheHeart);
+        mp3Player.addSong(iGotMine);
+        Map<String, Integer> songCountByArtist = mp3Player.countByArtist();
+
+        assertThat(songCountByArtist.size(), is(3));
+        assertThat(songCountByArtist.get("Artic Monkeys"), is(3));
+        assertThat(songCountByArtist.get("The Kooks"), is(2));
+        assertThat(songCountByArtist.get("The Black Keys"), is(1));
     }
 }
