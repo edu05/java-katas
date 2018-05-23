@@ -15,7 +15,7 @@ public class MP3Player {
     public List<Song> findByTitle(String songTitle) {
         List<Song> matchingSongs = new ArrayList<>();
         for (Song song : songs) {
-            if (song.getTitle().contains(songTitle)) {
+            if (song.getTitle().toLowerCase().contains(songTitle.toLowerCase())) {
                 matchingSongs.add(song);
             }
         }
@@ -24,7 +24,14 @@ public class MP3Player {
     }
 
     public List<Song> findByArtist(String artist) {
-        return new ArrayList<>();
+        List<Song> matchingSongs = new ArrayList<>();
+        for (Song song : songs) {
+            if (song.getArtist().toLowerCase().contains(artist.toLowerCase())) {
+                matchingSongs.add(song);
+            }
+        }
+
+        return matchingSongs;
     }
 
 
