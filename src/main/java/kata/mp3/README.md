@@ -13,3 +13,5 @@ The goal of this kata is to play a little bit with the List and Map APIs while p
 5. MP3s normally allow you see some statistics, like how many songs per artist you have
 
 6. Can we do it without the null check?
+
+7. Some MP3s can connect to the internet to provide extra information about the songs in them

@@ -14,6 +14,10 @@ public class MP3Player {
 
     private final List<Song> songs = new ArrayList<>();
 
+    public MP3Player(InternetProvider internetProvider) {
+
+    }
+
     public void addSong(Song song) {
         songs.add(song);
 
@@ -39,5 +43,9 @@ public class MP3Player {
         return songs.stream()
                 .filter(song -> searchByFunction.apply(song).toLowerCase().contains(searchTerm.toLowerCase()))
                 .collect(Collectors.toList());
+    }
+
+    public SongInfo getSongInfo(Song song) {
+        return null;
     }
 }

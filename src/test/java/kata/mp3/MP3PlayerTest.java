@@ -1,5 +1,7 @@
 package kata.mp3;
 
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
@@ -8,12 +10,22 @@ import java.util.Map;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.when;
 
 public class MP3PlayerTest {
 
+    private InternetProvider internetProvider = mock(InternetProvider.class);
+
+    @Before
+    public void setUp() throws Exception {
+        reset(internetProvider);
+    }
+
     @Test
     public void shouldFindByTitle() throws Exception {
-        MP3Player mp3Player = new MP3Player();
+        MP3Player mp3Player = new MP3Player(internetProvider);
 
         Song song = new Song("Should I Stay or Should I Go", "The Clash");
         mp3Player.addSong(song);
@@ -25,7 +37,7 @@ public class MP3PlayerTest {
 
     @Test
     public void shouldFindByPartialTitle() throws Exception {
-        MP3Player mp3Player = new MP3Player();
+        MP3Player mp3Player = new MP3Player(internetProvider);
 
         Song shouldIStayOrShouldIGo = new Song("Should I Stay or Should I Go", "The Clash");
         Song sheMovesInHerOwnWay = new Song("She Moves in Her Own Way", "The Kooks");
@@ -42,7 +54,7 @@ public class MP3PlayerTest {
 
     @Test
     public void shouldFindByPartialArtist() throws Exception {
-        MP3Player mp3Player = new MP3Player();
+        MP3Player mp3Player = new MP3Player(internetProvider);
 
         Song doIWannaKnow = new Song("Do I Wanna Know?", "Artic Monkeys");
         Song sheMovesInHerOwnWay = new Song("She Moves in Her Own Way", "The Kooks");
@@ -59,11 +71,11 @@ public class MP3PlayerTest {
 
     @Test
     public void shouldCountArtistSongs() throws Exception {
-        MP3Player mp3Player = new MP3Player();
+        MP3Player mp3Player = new MP3Player(internetProvider);
 
         Song doIWannaKnow = new Song("Do I Wanna Know?", "Artic Monkeys");
-        Song why = new Song("why'd you only call me when you're high" , "Artic Monkeys");
-        Song dancefloor = new Song("I Bet You Look Good On The Dancefloor" , "Artic Monkeys");
+        Song why = new Song("why'd you only call me when you're high", "Artic Monkeys");
+        Song dancefloor = new Song("I Bet You Look Good On The Dancefloor", "Artic Monkeys");
         Song sheMovesInHerOwnWay = new Song("She Moves in Her Own Way", "The Kooks");
         Song junkOfTheHeart = new Song("Junk of The Heart", "The Kooks");
         Song iGotMine = new Song("I Got Mine", "The Black Keys");
@@ -80,5 +92,20 @@ public class MP3PlayerTest {
         assertThat(songCountByArtist.get("Artic Monkeys"), is(3));
         assertThat(songCountByArtist.get("The Kooks"), is(2));
         assertThat(songCountByArtist.get("The Black Keys"), is(1));
+    }
+
+    @Test
+    public void shouldGetFullSongInfoFromTheInternet() throws Exception {
+        MP3Player mp3Player = new MP3Player(internetProvider);
+
+        Song song = new Song("Should I Stay or Should I Go", "The Clash");
+        mp3Player.addSong(song);
+
+        SongInfo expectedSongIfo = new SongInfo(song.getTitle(), song.getArtist(), "Punk", 1982);
+        when(internetProvider.getMoreInfo(song)).thenReturn(expectedSongIfo);
+
+        SongInfo actualSongInfo = mp3Player.getSongInfo(song);
+
+        Assert.assertThat(actualSongInfo, is(expectedSongIfo));
     }
 }
