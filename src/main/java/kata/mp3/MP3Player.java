@@ -27,13 +27,8 @@ public class MP3Player {
     public Map<String, Integer> countByArtist() {
         Map<String, Integer> counts = new HashMap<>();
         for (Song song : songs) {
-            Integer currentCount = counts.get(song.getArtist());
-            if (currentCount == null) {
-                counts.put(song.getArtist(), 1);
-            } else  {
-                counts.put(song.getArtist(), currentCount + 1);
-            }
-
+            Integer currentCount = counts.getOrDefault(song.getArtist(), 0);
+            counts.put(song.getArtist(), currentCount + 1);
         }
 
         return counts;
