@@ -108,4 +108,21 @@ public class MP3PlayerTest {
 
         Assert.assertThat(actualSongInfo, is(expectedSongIfo));
     }
+
+    @Test
+    public void shouldReturnMinimumInfoWhenInternetNotAvailable() throws Exception {
+        MP3Player mp3Player = new MP3Player(internetProvider);
+
+        Song song = new Song("Should I Stay or Should I Go", "The Clash");
+        mp3Player.addSong(song);
+
+        when(internetProvider.getMoreInfo(song)).thenThrow(new NoSignalException());
+
+        SongInfo actualSongInfo = mp3Player.getSongInfo(song);
+
+        Assert.assertThat(actualSongInfo.getTitle(), is(song.getTitle()));
+        Assert.assertThat(actualSongInfo.getArtist(), is(song.getArtist()));
+        Assert.assertNull(actualSongInfo.getCategory());
+        Assert.assertThat(actualSongInfo.getReleaseYear(), is(0));
+    }
 }

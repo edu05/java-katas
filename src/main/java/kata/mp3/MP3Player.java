@@ -46,6 +46,11 @@ public class MP3Player {
     }
 
     public SongInfo getSongInfo(Song song) {
-        return internetProvider.getMoreInfo(song);
+        try {
+            return internetProvider.getMoreInfo(song);
+        } catch (NoSignalException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

@@ -15,3 +15,6 @@ The goal of this kata is to play a little bit with the List and Map APIs while p
 6. Can we do it without the null check?
 
 7. Some MP3s can connect to the internet to provide extra information about the songs in them
+
+8. Some times MP3s can't connect to the internet because there's no signal, represent this with the InternetProvider component
+of your MP3 throwing a NoSignalException and in such cases still return the minimum song info (title and artist)

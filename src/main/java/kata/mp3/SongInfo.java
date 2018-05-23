@@ -14,6 +14,10 @@ public class SongInfo {
         this.releaseYear = releaseYear;
     }
 
+    public SongInfo(String title, String artist) {
+        this(title, artist, null, 0);
+    }
+
     public String getTitle() {
         return title;
     }
