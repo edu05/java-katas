@@ -2,6 +2,7 @@ package kata.mp3;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class MP3Player {
@@ -14,16 +15,16 @@ public class MP3Player {
     }
 
     public List<Song> findByTitle(String songTitle) {
-        return songs.stream()
-                .filter(song -> song.getTitle().toLowerCase().contains(songTitle.toLowerCase()))
-                .collect(Collectors.toList());
+        return findBy(songTitle, song -> song.getTitle());
     }
 
     public List<Song> findByArtist(String artist) {
-        return songs.stream()
-                .filter(song -> song.getArtist().toLowerCase().contains(artist.toLowerCase()))
-                .collect(Collectors.toList());
+        return findBy(artist, song -> song.getArtist());
     }
 
-
+    private List<Song> findBy(String searchTerm, Function<Song, String> searchByFunction) {
+        return songs.stream()
+                .filter(song -> searchByFunction.apply(song).toLowerCase().contains(searchTerm.toLowerCase()))
+                .collect(Collectors.toList());
+    }
 }
