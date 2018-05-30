@@ -41,3 +41,16 @@ A LRUCache follows the LRU policy by keeping the N last recently used items insi
 
 - Transform your Cache into a LRUCache, i.e. a cache where new items are always inserted and only holds the N last recently
 used items.
+
+## An optimal implementation of a LRUCache
+
+Optimal implementations of a LRUCache have really fast `get` and `put` operations, this normally translates to them being O(1).
+Proving our LRUCache is O(1) for both operations via TDD is pretty hard, what we can do instead is convince ourselves there are
+no loops in the code or recursion in the code, i.e. only a number of constant code lines ever gets executed - while still maintaining
+the correct functionality of the code
+
+- Make `get` and `put` operations in the LRUCache O(1)
+
+Hint 1: We can achieve O(1) for both operations if we can maintain the cache entries ordered by their last access time at all times
+Hint 2: In a `put` we need to place the new item in the front of the collection and discard the last item of the collection from the cache if it was full
+Hint 3: In a `get` we need to pull the entry from it's current position and place it in the front of the collection

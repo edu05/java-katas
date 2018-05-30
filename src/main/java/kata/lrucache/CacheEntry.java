@@ -1,25 +1,24 @@
 package kata.lrucache;
 
-import java.time.LocalDateTime;
-
 public class CacheEntry {
 
     private final Object key;
     private final Object entry;
-    private LocalDateTime lastAccessTime;
+    private CacheEntry previous;
+    private CacheEntry next;
 
-    private CacheEntry(Object key, Object entry, LocalDateTime lastAccessTime) {
+    CacheEntry(Object key, Object entry, CacheEntry previous, CacheEntry next) {
         this.key = key;
         this.entry = entry;
-        this.lastAccessTime = lastAccessTime;
+        this.previous = previous;
+        this.next = next;
     }
 
     public static CacheEntry newEntry(Object key, Object entry) {
-        return new CacheEntry(key, entry, LocalDateTime.now());
+        return new CacheEntry(key, entry, null, null);
     }
 
     public Object getEntry() {
-        lastAccessTime = LocalDateTime.now();
         return entry;
     }
 
@@ -27,7 +26,19 @@ public class CacheEntry {
         return key;
     }
 
-    public LocalDateTime getLastAccessTime() {
-        return lastAccessTime;
+    public CacheEntry getPrevious() {
+        return previous;
+    }
+
+    public CacheEntry getNext() {
+        return next;
+    }
+
+    public void setPrevious(CacheEntry previous) {
+        this.previous = previous;
+    }
+
+    public void setNext(CacheEntry next) {
+        this.next = next;
     }
 }
