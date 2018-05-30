@@ -24,18 +24,19 @@ public class CacheTest {
     }
 
     @Test
-    public void shouldNotBeAbleToInsertMoreThanNItems() throws Exception {
+    public void shouldBeAbleToInsertMoreThanNItems() throws Exception {
         Cache cache = new Cache(3);
 
         cache.put("key", "value");
         cache.put("house keys", "house");
         cache.put("car keys", "car");
+        cache.get("key");
         cache.put("yacht keys", "yacht");
 
         assertThat(cache.get("key"), is("value"));
-        assertThat(cache.get("house keys"), is("house"));
         assertThat(cache.get("car keys"), is("car"));
-        assertNull(cache.get("yacht keys"));
+        assertThat(cache.get("yacht keys"), is("yacht"));
+        assertNull(cache.get("house keys"));
     }
 
     @Test

@@ -26,3 +26,18 @@ as close as it can be to the CPU (L1 and L2 caches in PC specs starting to sound
 
 - Limit your cache to hold only N items, after it's been filled ignore any requests to put in any new items. Items for existing
 keys can still be updated
+
+
+## What items should be placed in each memory layer?
+
+To reduce memory travelling time, an utopic PC would know in advance what pieces of memory it would need next and keep those
+close by, while keeping the unused memories farther away. Some PCs do try to predict what data they'll need next, and place them near the CPU, but they're not perfect.
+
+Another successful strategy to decide what layer a piece of memory should reside in is the Last Recently Used policy.
+The rationale behind this strategy is pieces of memory that have been used recently are more likely to be used in the near future than
+items that haven't been used in a long time - this is a pretty good heuristic.
+
+A LRUCache follows the LRU policy by keeping the N last recently used items inside it.
+
+- Transform your Cache into a LRUCache, i.e. a cache where new items are always inserted and only holds the N last recently
+used items.
