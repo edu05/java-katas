@@ -7,6 +7,10 @@ public class Cache {
 
     private final Map<Object, Object> cache = new HashMap<>();
 
+    public Cache(int cacheSize) {
+
+    }
+
     public void put(Object key, Object value) {
         cache.put(key, value);
     }
