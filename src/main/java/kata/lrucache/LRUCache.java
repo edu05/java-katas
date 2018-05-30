@@ -5,12 +5,12 @@ import java.util.Map;
 
 import static kata.lrucache.CacheEntry.newEntry;
 
-public class Cache {
+public class LRUCache {
 
     private final Map<Object, CacheEntry> cache = new HashMap<>();
     private final int cacheSize;
 
-    public Cache(int cacheSize) {
+    public LRUCache(int cacheSize) {
         if (cacheSize < 1) {
             throw new IllegalArgumentException("Well what's the point of an empty cache?");
         }
