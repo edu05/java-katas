@@ -36,7 +36,9 @@ public class LRUCache {
         else if (cache.containsKey(key)) {
             CacheEntry removedCacheEntry = cache.remove(key);
             removeFromList(removedCacheEntry);
-            //template A
+            first.setPrevious(newEntry);
+            newEntry.setNext(first);
+            first = newEntry;
         }
 
         //else if cache is full
@@ -47,14 +49,18 @@ public class LRUCache {
         else if (cache.size() == size) {
             cache.remove(last.getKey());
             removeFromList(last);
-            //template A
+            first.setPrevious(newEntry);
+            newEntry.setNext(first);
+            first = newEntry;
         }
 
         //else
            //insert newEntry as first item in the list - template A
 
         else {
-            //template A
+            first.setPrevious(newEntry);
+            newEntry.setNext(first);
+            first = newEntry;
         }
 
         //insert newEntry into cache
@@ -66,21 +72,30 @@ public class LRUCache {
            //remove first entry - template B
 
         if (cacheEntry == first) {
-            //template B
+            first.getNext().setPrevious(null);
+            first = first.getNext();
+            cacheEntry.setNext(null);
         }
 
         //else if cacheEntry is last
            //remove last entry - template C
 
         else if (cacheEntry == last) {
-            //template C
+            last.getPrevious().setNext(null);
+            last = last.getPrevious();
+            cacheEntry.setPrevious(null);
         }
 
         //else
            //remove cacheEntry from the middle - template D
         
         else {
-            //template D
+            CacheEntry previous = cacheEntry.getPrevious();
+            CacheEntry next = cacheEntry.getNext();
+            previous.setNext(next);
+            next.setPrevious(previous);
+            cacheEntry.setPrevious(null);
+            cacheEntry.setNext(null);
         }
     }
 
@@ -105,14 +120,26 @@ public class LRUCache {
            //move cacheEntry to the front from the last position - template E
 
         if (cacheEntry == last) {
-            //template E
+            last.getPrevious().setNext(null);
+            last = last.getPrevious();
+            first.setPrevious(cacheEntry);
+            cacheEntry.setNext(first);
+            cacheEntry.setPrevious(null);
+            first = cacheEntry;
         }
 
         //else
            //move cacheEntry to the front from the middle - template F
 
         else {
-            //template F
+            CacheEntry previous = cacheEntry.getPrevious();
+            CacheEntry next = cacheEntry.getNext();
+            previous.setNext(next);
+            next.setPrevious(previous);
+            first.setPrevious(cacheEntry);
+            cacheEntry.setNext(first);
+            cacheEntry.setPrevious(null);
+            first = cacheEntry;
         }
     }
 }
