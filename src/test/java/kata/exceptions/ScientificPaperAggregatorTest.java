@@ -66,4 +66,41 @@ public class ScientificPaperAggregatorTest {
         verify(mobileReaderApp).pushContent(Arrays.asList(anotherPaper, newPaper));
         verify(arXivRepository, times(2)).getNewScientificPapers();
     }
+
+    @Test
+    public void shouldRetryUpToThreeTimesToRetrieveNewPapersFromJSTOR() throws Exception {
+        ArXivRepository arXivRepository = mock(ArXivRepository.class);
+        JSTORRepository jstorRepository = mock(JSTORRepository.class);
+        MobileReaderApp mobileReaderApp = mock(MobileReaderApp.class);
+
+        ScientificPaper newPaper = new ScientificPaper();
+        when(arXivRepository.getNewScientificPapers()).thenReturn(Arrays.asList(newPaper));
+        when(jstorRepository.getNewScientificPapers()).thenThrow(new NullPointerException());
+
+        ScientificPaperAggregator scientificPaperAggregator = new ScientificPaperAggregator(arXivRepository, jstorRepository, mobileReaderApp);
+
+        scientificPaperAggregator.aggregateNewScientificPapers();
+
+        verify(mobileReaderApp).pushContent(Arrays.asList(newPaper));
+        verify(jstorRepository, times(3)).getNewScientificPapers();
+    }
+
+    @Test
+    public void shouldStopRetryingRetrievingNewPapersFromJSTORAfterSuccessfulDownload() throws Exception {
+        ArXivRepository arXivRepository = mock(ArXivRepository.class);
+        JSTORRepository jstorRepository = mock(JSTORRepository.class);
+        MobileReaderApp mobileReaderApp = mock(MobileReaderApp.class);
+
+        ScientificPaper newPaper = new ScientificPaper();
+        ScientificPaper anotherPaper = new ScientificPaper();
+        when(arXivRepository.getNewScientificPapers()).thenReturn(Arrays.asList(newPaper));
+        when(jstorRepository.getNewScientificPapers()).thenThrow(new NullPointerException()).thenReturn(Arrays.asList(anotherPaper));
+
+        ScientificPaperAggregator scientificPaperAggregator = new ScientificPaperAggregator(arXivRepository, jstorRepository, mobileReaderApp);
+
+        scientificPaperAggregator.aggregateNewScientificPapers();
+
+        verify(mobileReaderApp).pushContent(Arrays.asList(newPaper, anotherPaper));
+        verify(jstorRepository, times(2)).getNewScientificPapers();
+    }
 }

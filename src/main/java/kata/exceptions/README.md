@@ -62,3 +62,5 @@ is `main()` &rarr; `callA()` &rarr; `callB()` as illustrated by the debugger.
 
 2. When `ArXivRepository` throws an `IOException` while getting new papers, retry the operation a maximum of 3 times until successful.
 Send only the papers retrieved from the `JSTORRepository` if unsuccessful after the third time.
+
+3. The `JSTORRepository` is quite buggy and throws `RuntimeException`s from time to time, implement a similar retry mechanism for it
