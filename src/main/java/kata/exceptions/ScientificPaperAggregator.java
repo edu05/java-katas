@@ -9,12 +9,15 @@ public class ScientificPaperAggregator {
     private final ArXivRepository arXivRepository;
     private final JSTORRepository jstorRepository;
     private final MobileReaderApp mobileReaderApp;
+    private final ErrorNotifier errorNotifier;
 
-    public ScientificPaperAggregator(ArXivRepository arXivRepository, JSTORRepository jstorRepository, MobileReaderApp mobileReaderApp, ErrorNotifier errorNotifier) {
+    public ScientificPaperAggregator(ArXivRepository arXivRepository, JSTORRepository jstorRepository,
+                                     MobileReaderApp mobileReaderApp, ErrorNotifier errorNotifier) {
         this.arXivRepository = arXivRepository;
         this.jstorRepository = jstorRepository;
 
         this.mobileReaderApp = mobileReaderApp;
+        this.errorNotifier = errorNotifier;
     }
 
     public void aggregateNewScientificPapers() {
@@ -25,6 +28,7 @@ public class ScientificPaperAggregator {
                 newScientificPapersFromArxiv = arXivRepository.getNewScientificPapers();
                 break;
             } catch (IOException e) {
+                errorNotifier.notifyError("ArXiv failed", e);
                 retryCounter++;
             }
         } while (retryCounter < 3);
@@ -37,6 +41,7 @@ public class ScientificPaperAggregator {
                 newScientificPapersFromJSTOR = jstorRepository.getNewScientificPapers();
                 break;
             } catch (RuntimeException e) {
+                errorNotifier.notifyError("JSTOR failed", e);
                 retryCounter++;
             }
         } while (retryCounter < 3);
