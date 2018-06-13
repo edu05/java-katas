@@ -19,11 +19,15 @@ public class ScientificPaperAggregator {
 
     public void aggregateNewScientificPapers() {
         List<ScientificPaper> newScientificPapersFromArxiv = new ArrayList<>();
-        try {
-            newScientificPapersFromArxiv = arXivRepository.getNewScientificPapers();
-        } catch (IOException e) {
-            //what should we do here?
-        }
+        int retryCounter = 0;
+        do {
+            try {
+                newScientificPapersFromArxiv = arXivRepository.getNewScientificPapers();
+                break;
+            } catch (IOException e) {
+                retryCounter++;
+            }
+        } while (retryCounter < 3);
 
         List<ScientificPaper> newScientificPapersFromJSTOR = jstorRepository.getNewScientificPapers();
 
