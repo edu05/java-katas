@@ -29,7 +29,18 @@ public class ScientificPaperAggregator {
             }
         } while (retryCounter < 3);
 
-        List<ScientificPaper> newScientificPapersFromJSTOR = jstorRepository.getNewScientificPapers();
+        List<ScientificPaper> newScientificPapersFromJSTOR = new ArrayList<>();
+
+        retryCounter = 0;
+        do {
+            try {
+                newScientificPapersFromJSTOR = jstorRepository.getNewScientificPapers();
+                break;
+            } catch (RuntimeException e) {
+                retryCounter++;
+            }
+        } while (retryCounter < 3);
+
 
         List<ScientificPaper> aggregatedNewScientificPapers = new ArrayList<>();
         aggregatedNewScientificPapers.addAll(newScientificPapersFromArxiv);
