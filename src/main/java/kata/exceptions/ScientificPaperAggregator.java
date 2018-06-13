@@ -10,7 +10,7 @@ public class ScientificPaperAggregator {
     private final JSTORRepository jstorRepository;
     private final MobileReaderApp mobileReaderApp;
 
-    public ScientificPaperAggregator(ArXivRepository arXivRepository, JSTORRepository jstorRepository, MobileReaderApp mobileReaderApp) {
+    public ScientificPaperAggregator(ArXivRepository arXivRepository, JSTORRepository jstorRepository, MobileReaderApp mobileReaderApp, ErrorNotifier errorNotifier) {
         this.arXivRepository = arXivRepository;
         this.jstorRepository = jstorRepository;
 

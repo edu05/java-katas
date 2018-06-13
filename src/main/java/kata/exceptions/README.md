@@ -64,3 +64,6 @@ is `main()` &rarr; `callA()` &rarr; `callB()` as illustrated by the debugger.
 Send only the papers retrieved from the `JSTORRepository` if unsuccessful after the third time.
 
 3. The `JSTORRepository` is quite buggy and throws `RuntimeException`s from time to time, implement a similar retry mechanism for it
+
+4. For each retry, send an alert via the ErrorNotifier for Carmen to be notified about this, she will then
+forward her concerns with the research publishers

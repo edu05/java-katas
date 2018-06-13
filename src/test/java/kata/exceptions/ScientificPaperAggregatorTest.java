@@ -3,11 +3,13 @@ package kata.exceptions;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 public class ScientificPaperAggregatorTest {
@@ -15,7 +17,8 @@ public class ScientificPaperAggregatorTest {
     private ArXivRepository arXivRepository = mock(ArXivRepository.class);
     private JSTORRepository jstorRepository = mock(JSTORRepository.class);
     private MobileReaderApp mobileReaderApp = mock(MobileReaderApp.class);
-    private ScientificPaperAggregator scientificPaperAggregator = new ScientificPaperAggregator(arXivRepository, jstorRepository, mobileReaderApp);
+    private ErrorNotifier errorNotifier = mock(ErrorNotifier.class);
+    private ScientificPaperAggregator scientificPaperAggregator = new ScientificPaperAggregator(arXivRepository, jstorRepository, mobileReaderApp, errorNotifier);
 
     @Test
     public void shouldAggregatePapersFromArXivAndJSTOR() throws Exception {
@@ -78,4 +81,19 @@ public class ScientificPaperAggregatorTest {
         verify(mobileReaderApp).pushContent(Arrays.asList(newPaper, anotherPaper));
         verify(jstorRepository, times(2)).getNewScientificPapers();
     }
+
+    @Test
+    public void shouldNotifyWhenArXivMaxesOutOnRetries() throws Exception {
+        ScientificPaper newPaper = new ScientificPaper();
+        IOException ioException = new IOException("File too big");
+        when(arXivRepository.getNewScientificPapers()).thenThrow(ioException);
+        when(jstorRepository.getNewScientificPapers()).thenReturn(Arrays.asList(newPaper));
+
+        scientificPaperAggregator.aggregateNewScientificPapers();
+
+        verify(errorNotifier, times(3)).notifyError("ArXiv failed", ioException);
+    }
+
+    //similarly for JSTOR
+
 }
