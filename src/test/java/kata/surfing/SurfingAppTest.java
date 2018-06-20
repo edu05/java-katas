@@ -1,6 +1,11 @@
 package kata.surfing;
 
+import org.junit.Before;
 import org.junit.Test;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -11,7 +16,13 @@ public class SurfingAppTest {
 
     private WeatherApp weatherApp = mock(WeatherApp.class);
     private NotifierApp notifierApp = mock(NotifierApp.class);
-    private SurfingApp surfingApp = new SurfingApp(weatherApp, notifierApp);
+    private ClockApp clockApp = mock(ClockApp.class);
+    private SurfingApp surfingApp = new SurfingApp(weatherApp, notifierApp, clockApp);
+
+    @Before
+    public void setUp() throws Exception {
+        when(clockApp.getCurrentTime()).thenReturn(LocalDateTime.of(LocalDate.now(), LocalTime.of(22, 00)));
+    }
 
     @Test
     public void shouldNotifyToGoSurfingOnFirstSetIdealWeatherConditions() throws Exception {
@@ -43,5 +54,14 @@ public class SurfingAppTest {
         surfingApp.alertOnGoodWeatherConditions();
 
         verify(notifierApp).notifyAndVibrate("Go surfing ASAP!");
+    }
+
+    @Test
+    public void shouldNotDoAnythingWhenNotOClockTime() throws Exception {
+        when(clockApp.getCurrentTime()).thenReturn(LocalDateTime.of(LocalDate.now(), LocalTime.of(22, 8)));
+
+        surfingApp.alertOnGoodWeatherConditions();
+
+        verifyZeroInteractions(weatherApp, notifierApp);
     }
 }

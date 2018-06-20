@@ -6,7 +6,7 @@ public class SurfingApp {
     private final WeatherApp weatherApp;
     private final NotifierApp notifierApp;
 
-    public SurfingApp(WeatherApp weatherApp, NotifierApp notifierApp) {
+    public SurfingApp(WeatherApp weatherApp, NotifierApp notifierApp, ClockApp clockApp) {
         this.weatherApp = weatherApp;
         this.notifierApp = notifierApp;
     }
