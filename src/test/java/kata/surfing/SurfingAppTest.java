@@ -36,4 +36,12 @@ public class SurfingAppTest {
 
         verifyZeroInteractions(notifierApp);
     }
+
+    @Test
+    public void shouldNotifyAndVibrateToGoSurfingASAPOnFantasticWeatherConditions() throws Exception {
+        when(weatherApp.getWeatherConditions(55)).thenReturn(new WeatherConditions(26, 13));
+        surfingApp.alertOnGoodWeatherConditions();
+
+        verify(notifierApp).notifyAndVibrate("Go surfing ASAP!");
+    }
 }
