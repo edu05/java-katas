@@ -16,7 +16,9 @@ public class SurfingApp {
 
         int temperature = weatherConditions.getTemperatureInCelsius();
         int windSpeed = weatherConditions.getWindSpeedInMetersPerHour();
-        if ((temperature >= 21 && windSpeed >= 12) || (temperature >= 25 && windSpeed >= 9)) {
+        if (temperature > 25 && windSpeed > 12) {
+            notifierApp.notifyAndVibrate("Go surfing ASAP!");
+        } else if ((temperature >= 21 && windSpeed >= 12) || (temperature >= 25 && windSpeed >= 9)) {
             notifierApp.notify("You should go surfing today");
         }
     }
