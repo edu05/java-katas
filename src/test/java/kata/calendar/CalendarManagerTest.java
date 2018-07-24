@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 
 public class CalendarManagerTest {
@@ -118,5 +119,18 @@ public class CalendarManagerTest {
         List<Meeting> scheduledMeetings = calendarManager.scheduledMeetings();
 
         assertThat(scheduledMeetings.size(), is(2));
+    }
+
+    @Test
+    public void shouldIndicateClashingMeetingWhenFailingToSchedule() throws Exception {
+        Meeting meeting = new Meeting("meeting", LocalDateTime.now(), LocalDateTime.now().plusHours(1));
+        Meeting fullyOverlappingMeeting = new Meeting("fullyOverlappingMeeting", LocalDateTime.now().minusMinutes(30), LocalDateTime.now().plusHours(3));
+
+        calendarManager.schedule(meeting);
+        CalendarOperationResult calendarOperationResult = calendarManager.schedule(fullyOverlappingMeeting);
+
+        assertFalse(calendarOperationResult.isSuccess());
+        String expectedFailureMessage = new StringBuilder().append("clashing with meeting ").append(meeting).toString();
+        assertThat(calendarOperationResult.getFailureReason(), is(expectedFailureMessage));
     }
 }

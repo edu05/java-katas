@@ -8,13 +8,14 @@ public class CalendarManager {
 
     private List<Meeting> meetings = new ArrayList<>();
 
-    public void schedule(Meeting newMeeting) {
+    public CalendarOperationResult schedule(Meeting newMeeting) {
         boolean noOverlappingMeetings = meetings.stream()
                 .allMatch(meeting -> newMeeting.getEnd().isBefore(meeting.getStart()) || newMeeting.getStart().isAfter(meeting.getEnd()));
 
         if (noOverlappingMeetings) {
             meetings.add(newMeeting);
         }
+        return null;
     }
 
     public List<Meeting> scheduledMeetings() {
