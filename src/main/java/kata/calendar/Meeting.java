@@ -8,6 +8,10 @@ public class Meeting {
     private final LocalDateTime end;
 
     public Meeting(String name, LocalDateTime start, LocalDateTime end) {
+        if (!start.isBefore(end)) {
+            throw new IllegalArgumentException("Start time " + start + " is not before end time " + end);
+        }
+
         this.name = name;
         this.start = start;
         this.end = end;
