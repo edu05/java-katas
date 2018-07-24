@@ -2,6 +2,7 @@ package kata.calendar;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CalendarManager {
@@ -9,13 +10,16 @@ public class CalendarManager {
     private List<Meeting> meetings = new ArrayList<>();
 
     public CalendarOperationResult schedule(Meeting newMeeting) {
-        boolean noOverlappingMeetings = meetings.stream()
-                .allMatch(meeting -> newMeeting.getEnd().isBefore(meeting.getStart()) || newMeeting.getStart().isAfter(meeting.getEnd()));
+        Optional<Meeting> firstClashingMeeting = meetings.stream()
+                .filter(meeting -> !newMeeting.getEnd().isBefore(meeting.getStart()) && !newMeeting.getStart().isAfter(meeting.getEnd()))
+                .findFirst();
 
-        if (noOverlappingMeetings) {
+        if (!firstClashingMeeting.isPresent()) {
             meetings.add(newMeeting);
+            return CalendarOperationResult.success();
+        } else {
+            return CalendarOperationResult.failure("clashing with meeting " + firstClashingMeeting.get());
         }
-        return null;
     }
 
     public List<Meeting> scheduledMeetings() {
