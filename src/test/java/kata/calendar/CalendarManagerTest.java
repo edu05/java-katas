@@ -133,4 +133,17 @@ public class CalendarManagerTest {
         String expectedFailureMessage = new StringBuilder().append("clashing with meeting ").append(meeting).toString();
         assertThat(calendarOperationResult.getFailureReason(), is(expectedFailureMessage));
     }
+
+    @Test
+    public void shouldNotScheduleMeetingsWithTheSameName() throws Exception {
+        Meeting meeting = new Meeting("meeting", LocalDateTime.now(), LocalDateTime.now().plusHours(1));
+        Meeting anotherMeeting = new Meeting("meeting", LocalDateTime.now().plusHours(2), LocalDateTime.now().plusHours(3));
+
+        calendarManager.schedule(meeting);
+        CalendarOperationResult calendarOperationResult = calendarManager.schedule(anotherMeeting);
+
+        assertFalse(calendarOperationResult.isSuccess());
+        String expectedFailureMessage = new StringBuilder().append("existing meeting with same name ").append(meeting).toString();
+        assertThat(calendarOperationResult.getFailureReason(), is(expectedFailureMessage));
+    }
 }
