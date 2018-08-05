@@ -40,11 +40,11 @@ public class SimplifiedTennisMatch {
     }
 
     private boolean hasPlayer1Won() {
-        return player1Points >= 4 && player1Points - player2Points > 2;
+        return player1Points >= 4 && player1Points - player2Points > 3;
     }
 
     private boolean hasPlayer2Won() {
-        return player2Points >= 4 && player2Points - player1Points > 2;
+        return player2Points >= 4 && player2Points - player1Points > 3;
     }
 
     private String formatMatchScores() {
