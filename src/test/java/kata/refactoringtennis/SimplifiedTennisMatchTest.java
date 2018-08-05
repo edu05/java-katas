@@ -73,6 +73,10 @@ public class SimplifiedTennisMatchTest {
         assertThat(match.formatScore(), is(expectedScoreString));
     }
 
+    @Test(expected = UnsupportedOperationException.class)
+    public void testCantScoreAfterGameHasFinished() throws Exception {
+        nadalScore(5);
+    }
 
     private void federerScore(int nTimes) {
         for (int i = 0; i < nTimes; i++) {
