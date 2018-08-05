@@ -14,7 +14,7 @@ public class SimplifiedTennisMatch {
     }
 
     public void score(String playerName) {
-        if ((player1Points >= 4 && player1Points - player2Points > 2) || (player2Points >= 4 && player2Points - player1Points > 2)) {
+        if (hasPlayer1Won() || (hasPlayer2Won())) {
             throw new UnsupportedOperationException("Match has already finished, can't keep scoring");
         }
 
@@ -26,9 +26,9 @@ public class SimplifiedTennisMatch {
     }
 
     public String formatScore() {
-        if (player1Points >= 4 && player1Points - player2Points > 2) {
+        if (hasPlayer1Won()) {
             return player1 + " wins!";
-        } else if (player2Points >= 4 && player2Points - player1Points > 2) {
+        } else if (hasPlayer2Won()) {
             return player2 + " wins!";
         }
 
@@ -37,6 +37,14 @@ public class SimplifiedTennisMatch {
                 .append(formatMatchScores())
                 .toString();
         return score;
+    }
+
+    private boolean hasPlayer1Won() {
+        return player1Points >= 4 && player1Points - player2Points > 2;
+    }
+
+    private boolean hasPlayer2Won() {
+        return player2Points >= 4 && player2Points - player1Points > 2;
     }
 
     private String formatMatchScores() {
