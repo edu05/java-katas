@@ -14,6 +14,10 @@ public class SimplifiedTennisMatch {
     }
 
     public void score(String playerName) {
+        if ((player1Points >= 4 && player1Points - player2Points > 1) || (player2Points >= 4 && player2Points - player1Points > 1)) {
+            throw new UnsupportedOperationException("Match has already finished, can't keep scoring");
+        }
+
         if (playerName.equals(player1)) {
             player1Points++;
         } else if (playerName.equals(player2)) {
