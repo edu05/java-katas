@@ -92,10 +92,23 @@ public class SimplifiedTennisMatchTest {
     }
 
     @Test
-    public void testWinByMarginOf3Points() throws Exception {
+    public void testCantWinByMarginOf3Points() throws Exception {
         nadalScore(3);
         federerScore(3);
         nadalScore(3);
+
+        String expectedScoreString = new StringBuilder()
+                .append("Nadal - Federer\n")
+                .append("ADVANTAGE - ")
+                .toString();
+        assertThat(match.formatScore(), is(expectedScoreString));
+    }
+
+    @Test
+    public void testWinByMarginOf4Points() throws Exception {
+        nadalScore(3);
+        federerScore(3);
+        nadalScore(4);
 
         String expectedScoreString = new StringBuilder()
                 .append("Nadal wins!")
