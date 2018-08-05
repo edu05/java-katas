@@ -48,7 +48,7 @@ public class SimplifiedTennisMatchTest {
     }
 
     @Test
-    public void testNeedToWinByAMarginOf2Points() throws Exception {
+    public void testCantWinByMarginOf1Point() throws Exception {
         nadalScore(3);
         federerScore(3);
         nadalScore(1);
@@ -76,6 +76,31 @@ public class SimplifiedTennisMatchTest {
     @Test(expected = UnsupportedOperationException.class)
     public void testCantScoreAfterGameHasFinished() throws Exception {
         nadalScore(5);
+    }
+
+    @Test
+    public void testCantWinByMarginOf2Points() throws Exception {
+        nadalScore(3);
+        federerScore(3);
+        nadalScore(2);
+
+        String expectedScoreString = new StringBuilder()
+                .append("Nadal - Federer\n")
+                .append("ADVANTAGE - ")
+                .toString();
+        assertThat(match.formatScore(), is(expectedScoreString));
+    }
+
+    @Test
+    public void testWinByMarginOf3Points() throws Exception {
+        nadalScore(3);
+        federerScore(3);
+        nadalScore(3);
+
+        String expectedScoreString = new StringBuilder()
+                .append("Nadal wins!")
+                .toString();
+        assertThat(match.formatScore(), is(expectedScoreString));
     }
 
     private void federerScore(int nTimes) {
