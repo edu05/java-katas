@@ -78,7 +78,28 @@ public class SimplifiedTennisMatch {
         /**
          * Part 4 - change null for appropriate Score object
          */
-        return formatScoreModern(null);
+        Score score = getMatchScore();
+        return formatScoreModern(score);
+    }
+
+    private Score getMatchScore() {
+        String winner = null;
+        boolean isDeuce = false;
+        boolean isPlayer1Advantage = false;
+        boolean isPlayer2Advantage = false;
+
+        if (hasPlayer1Won()) {
+            winner = player1;
+        } else if (hasPlayer2Won()) {
+            winner = player2;
+        } else if ((player1Points >= MINIMUM_WIN_SCORE || player2Points >= MINIMUM_WIN_SCORE) && player1Points == player2Points) {
+            isDeuce = true;
+        } else if ((player1Points >= MINIMUM_WIN_SCORE || player2Points >= MINIMUM_WIN_SCORE) && player1Points > player2Points) {
+            isPlayer1Advantage = true;
+        } else if ((player1Points >= MINIMUM_WIN_SCORE || player2Points >= MINIMUM_WIN_SCORE) && player2Points > player1Points) {
+            isPlayer2Advantage = true;
+        }
+        return new Score(player1, player2, player1Points, player2Points, winner, isDeuce, isPlayer1Advantage, isPlayer2Advantage);
     }
 
     private String formatScoreModern(Score score) {
