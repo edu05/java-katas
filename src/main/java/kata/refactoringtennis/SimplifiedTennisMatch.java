@@ -2,6 +2,8 @@ package kata.refactoringtennis;
 
 public class SimplifiedTennisMatch {
 
+    public static final int MINIMUM_WIN_SCORE = 4;
+    public static final int WIN_MARGIN_REQUIRED = 3;
     private final String player1;
     private final String player2;
 
@@ -40,17 +42,17 @@ public class SimplifiedTennisMatch {
     }
 
     private boolean hasPlayer1Won() {
-        return player1Points >= 4 && player1Points - player2Points > 3;
+        return player1Points >= MINIMUM_WIN_SCORE && player1Points - player2Points > WIN_MARGIN_REQUIRED;
     }
 
     private boolean hasPlayer2Won() {
-        return player2Points >= 4 && player2Points - player1Points > 3;
+        return player2Points >= MINIMUM_WIN_SCORE && player2Points - player1Points > WIN_MARGIN_REQUIRED;
     }
 
     private String formatMatchScores() {
-        if (player1Points >= 4) {
+        if (player1Points >= MINIMUM_WIN_SCORE) {
             return player1Points > player2Points ? "ADVANTAGE - " : "DEUCE";
-        } else if (player2Points >= 4) {
+        } else if (player2Points >= MINIMUM_WIN_SCORE) {
             return player2Points > player1Points ? " - ADVANTAGE" : "DEUCE";
         }
 
