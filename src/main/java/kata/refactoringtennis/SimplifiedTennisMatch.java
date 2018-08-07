@@ -28,17 +28,14 @@ public class SimplifiedTennisMatch {
     }
 
     public String formatScore() {
-        if (hasPlayer1Won()) {
-            return player1 + " wins!";
-        } else if (hasPlayer2Won()) {
-            return player2 + " wins!";
+        Score score = getMatchScore();
+        if (score.getWinner().isPresent()) {
+            return score.getWinner().get() + " wins!";
         }
-
-        String score = new StringBuilder()
-                .append(player1 + " - " + player2 + "\n")
-                .append(formatMatchScores())
+        return new StringBuilder()
+                .append(score.getPlayer1() + " - " + score.getPlayer2() + "\n")
+                .append(formatMatchScores(score))
                 .toString();
-        return score;
     }
 
     private boolean hasPlayer1Won() {
@@ -49,14 +46,16 @@ public class SimplifiedTennisMatch {
         return player2Points >= MINIMUM_WIN_SCORE && player2Points - player1Points > WIN_MARGIN_REQUIRED;
     }
 
-    private String formatMatchScores() {
-        if (player1Points >= MINIMUM_WIN_SCORE) {
-            return player1Points > player2Points ? "ADVANTAGE - " : "DEUCE";
-        } else if (player2Points >= MINIMUM_WIN_SCORE) {
-            return player2Points > player1Points ? " - ADVANTAGE" : "DEUCE";
+    private String formatMatchScores(Score score) {
+        if (score.isPlayer1Advantage()) {
+            return "ADVANTAGE - ";
+        } else if (score.isPlayer2Advantage()) {
+            return " - ADVANTAGE";
+        } else if (score.isDeuce()) {
+            return "DEUCE";
+        } else {
+            return formatPoints(score.getPlayer1Points()) + " - " + formatPoints(score.getPlayer2Points());
         }
-
-        return formatPoints(player1Points) + " - " + formatPoints(player2Points);
     }
 
     private String formatPoints(int points) {
