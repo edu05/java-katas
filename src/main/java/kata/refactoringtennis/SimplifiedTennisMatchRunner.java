@@ -16,11 +16,12 @@ public class SimplifiedTennisMatchRunner {
             System.out.println("Type player 2's name");
             String player2 = scanner.next();
             SimplifiedTennisMatch simplifiedTennisMatch = new SimplifiedTennisMatch(player1, player2);
-            System.out.println(simplifiedTennisMatch.formatScoreModern());
+            NewStyleFormatter newStyleFormatter = new NewStyleFormatter();
+            System.out.println(simplifiedTennisMatch.formatScore(newStyleFormatter));
             System.out.println("Who should score next?");
             while (scanner.hasNext()) {
                 simplifiedTennisMatch.score(scanner.next().equals("1") ? player1 : player2);
-                System.out.println(simplifiedTennisMatch.formatScoreModern());
+                System.out.println(simplifiedTennisMatch.formatScore(newStyleFormatter));
                 System.out.println("Who should score next?");
             }
         }

@@ -23,7 +23,7 @@ public class SimplifiedTennisMatchTest {
                 .append("Nadal - Federer\n")
                 .append("0 - 0")
                 .toString();
-        assertThat(match.formatScore(), is(expectedScoreString));
+        assertThat(match.formatScore(new OldStyleFormatter()), is(expectedScoreString));
     }
 
     @Test
@@ -36,7 +36,7 @@ public class SimplifiedTennisMatchTest {
                 .append("30 - 15")
                 .toString();
 
-        assertThat(match.formatScore(), is(expectedScoreString));
+        assertThat(match.formatScore(new OldStyleFormatter()), is(expectedScoreString));
     }
 
     @Test
@@ -44,7 +44,7 @@ public class SimplifiedTennisMatchTest {
         nadalScore(4);
 
         String expectedScoreString = "Nadal wins!";
-        assertThat(match.formatScore(), is(expectedScoreString));
+        assertThat(match.formatScore(new OldStyleFormatter()), is(expectedScoreString));
     }
 
     @Test
@@ -57,7 +57,7 @@ public class SimplifiedTennisMatchTest {
                 .append("Nadal - Federer\n")
                 .append("ADVANTAGE - ")
                 .toString();
-        assertThat(match.formatScore(), is(expectedScoreString));
+        assertThat(match.formatScore(new OldStyleFormatter()), is(expectedScoreString));
     }
 
     @Test
@@ -70,7 +70,7 @@ public class SimplifiedTennisMatchTest {
                 .append("Nadal - Federer\n")
                 .append("DEUCE")
                 .toString();
-        assertThat(match.formatScore(), is(expectedScoreString));
+        assertThat(match.formatScore(new OldStyleFormatter()), is(expectedScoreString));
     }
 
     @Test(expected = UnsupportedOperationException.class)
@@ -88,7 +88,7 @@ public class SimplifiedTennisMatchTest {
                 .append("Nadal - Federer\n")
                 .append("ADVANTAGE - ")
                 .toString();
-        assertThat(match.formatScore(), is(expectedScoreString));
+        assertThat(match.formatScore(new OldStyleFormatter()), is(expectedScoreString));
     }
 
     @Test
@@ -101,7 +101,7 @@ public class SimplifiedTennisMatchTest {
                 .append("Nadal - Federer\n")
                 .append("ADVANTAGE - ")
                 .toString();
-        assertThat(match.formatScore(), is(expectedScoreString));
+        assertThat(match.formatScore(new OldStyleFormatter()), is(expectedScoreString));
     }
 
     @Test
@@ -113,7 +113,7 @@ public class SimplifiedTennisMatchTest {
         String expectedScoreString = new StringBuilder()
                 .append("Nadal wins!")
                 .toString();
-        assertThat(match.formatScore(), is(expectedScoreString));
+        assertThat(match.formatScore(new OldStyleFormatter()), is(expectedScoreString));
     }
 
     private void federerScore(int nTimes) {
